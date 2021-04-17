@@ -28,19 +28,23 @@ class WeatherApiModule {
     fun providesGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
-    fun providesClient() = if (BuildConfig.DEBUG) {
+    fun providesClient(): OkHttpClient
+    //= if (BuildConfig.DEBUG)
+    {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    } else {
-        OkHttpClient
-            .Builder()
+   return     OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
             .build()
     }
+//    else {
+//        OkHttpClient.Builder()
+//            .connectTimeout(30, TimeUnit.SECONDS)
+//            .readTimeout(30, TimeUnit.SECONDS)
+//            .build()
+//    }
 
     //Retrofit for networking
     @Provides
