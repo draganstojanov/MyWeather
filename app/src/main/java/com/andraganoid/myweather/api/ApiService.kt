@@ -1,6 +1,7 @@
 package com.andraganoid.myweather.api
 
 
+import com.andraganoid.myweather.model.AstronomyResponse
 import com.andraganoid.myweather.model.CurrentResponse
 import com.andraganoid.myweather.util.EndPoint
 import retrofit2.Response
@@ -15,6 +16,13 @@ interface ApiService {
         @Query("q") query: String,
         @Query("aqi") aqi: String
     ): Response<CurrentResponse>
+
+    @GET(EndPoint.ASTRONOMY)
+    suspend fun getAstronomy(
+        @Query("key") key: String,
+        @Query("q") query: String,
+        @Query("dt") date: String,
+    ): Response<AstronomyResponse>
 
 
 }

@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andraganoid.myweather.api.WeatherRepository
 import com.andraganoid.myweather.util.ResponseState
-import com.andraganoid.myweather.util.logA
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
@@ -19,12 +20,17 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
 
     init {
         getCurrentWeather()
+        getAstronomy()
     }
 
     private fun getCurrentWeather() {
-
-        _weatherData.value = ResponseState.Error("current weather")
+        //   _weatherData.value = ResponseState.Error("current weather")
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getCurrentWeather()) }
+    }
+
+    private fun getAstronomy() {
+        //  _astronomyData.value = ResponseState.Error("current weather")
+        viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy()) }
     }
 
 }

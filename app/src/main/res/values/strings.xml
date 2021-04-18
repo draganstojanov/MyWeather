@@ -4,7 +4,7 @@
     <string name="search_saved">Search saved locations</string>
     <string name="ok">OK</string>
     <string name="feels_like">Feels like</string>
-    <string name="wind_dir">Wind dir</string>
+    <string name="wind_dir">Wind direction</string>
     <string name="wind_speed">Wind speed</string>
     <string name="kmh">Km/h</string>
     <string name="wind_gust">Wind gust</string>
@@ -21,4 +21,19 @@
     <string name="air_quality">Air quality</string>
     <string name="air_us_index">US EPA standard</string>
     <string name="air_uk_index">UK Defra Index</string>
+    <string name="carbon_monoxide">Carbon monoxide</string>
+    <string name="mgm3">\u03BC\g/m\u00B3</string>
+    <string name="ozone">Ozone</string>
+    <string name="nitrogen_dioxide">Nitrogen dioxide</string>
+    <string name="sulphur_dioxide">Sulphur dioxide</string>
+    <string name="pm2_5">PM2.5</string>
+    <string name="pm10">PM10</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="moonrise">Moonrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="moonset">Moonset</string>
+    <string name="moon_phase">Moon phase</string>
+    <string name="moon_illumination">Moon illumination</string>
+    <string name="updated_at">Updated at</string>
+    <string name="observed_at">Observed at</string>
 </resources>

@@ -10,5 +10,10 @@ class WeatherRepository @Inject constructor(private val apiService: ApiService) 
         return if (r.isSuccessful) ResponseState.CurrentWeather(r.body()) else ResponseState.Error(r.message())
     }
 
+    suspend fun getAstronomy(): ResponseState {
+        val r = apiService.getAstronomy(key = EndPoint.KEY, query = "Belgrade",date="2021-04-18")//todo
+        return if (r.isSuccessful) ResponseState.AstroData(r.body()) else ResponseState.Error(r.message())
+    }
+
 
 }

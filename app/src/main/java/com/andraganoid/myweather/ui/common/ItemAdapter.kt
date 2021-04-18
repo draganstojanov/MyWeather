@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.common
+package com.andraganoid.myweather.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

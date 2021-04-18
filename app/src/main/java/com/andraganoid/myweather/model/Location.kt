@@ -1,5 +1,6 @@
 package com.andraganoid.myweather.model
 
+import com.andraganoid.myweather.util.DateFormatter
 import com.google.gson.annotations.SerializedName
 
 data class Location(
@@ -27,4 +28,7 @@ data class Location(
 
 	@field:SerializedName("tz_id")
 	val tzId: String? = null
-)
+){
+	val updatedAt:String
+		get() =DateFormatter.timeFromDate(localtime)
+}
