@@ -1,6 +1,7 @@
 package com.andraganoid.myweather.di
 
-import androidx.databinding.library.BuildConfig
+
+import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
 import com.andraganoid.myweather.util.EndPoint
 import com.google.gson.Gson
@@ -28,23 +29,17 @@ class WeatherApiModule {
     fun providesGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
-    fun providesClient(): OkHttpClient
-    //= if (BuildConfig.DEBUG)
-    {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-   return     OkHttpClient.Builder()
+    fun providesClient(): OkHttpClient {
+        val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor)
-            .build()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            client.addInterceptor(loggingInterceptor)
+        }
+        return client.build()
     }
-//    else {
-//        OkHttpClient.Builder()
-//            .connectTimeout(30, TimeUnit.SECONDS)
-//            .readTimeout(30, TimeUnit.SECONDS)
-//            .build()
-//    }
 
     //Retrofit for networking
     @Provides

@@ -14,7 +14,12 @@
     <color name="orange_lite">#FFC107</color>
     <color name="orange_dark">#FF6F00</color>
 
+    <color name="background_color">@color/grey_lite</color>
+    <color name="location_color">#B68439</color>
     <color name="current_color">#009688</color>
+    <color name="astro_color">#9851A3</color>
+    <color name="details_color">#3D7AAA</color>
+    <color name="air_quality_color">#B84A71</color>
 
 
 </resources>

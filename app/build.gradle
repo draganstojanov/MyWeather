@@ -22,17 +22,19 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -81,6 +83,9 @@ android {
 
         // Coil
         implementation("io.coil-kt:coil:1.1.1")
+
+        // Desugar
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
 
         //Test
 //    testImplementation 'junit:junit:4.+'

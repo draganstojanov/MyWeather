@@ -12,7 +12,8 @@ interface ApiService {
     @GET(EndPoint.CURRENT)
     suspend fun getCurrentWeather(
         @Query("key") key: String,
-        @Query("q") query: String
+        @Query("q") query: String,
+        @Query("aqi") aqi: String
     ): Response<CurrentResponse>
 
 

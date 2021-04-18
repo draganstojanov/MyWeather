@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">MyWeather</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="search_saved">Search saved locations</string>
+    <string name="ok">OK</string>
+    <string name="feels_like">Feels like</string>
+    <string name="wind_dir">Wind dir</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="kmh">Km/h</string>
+    <string name="wind_gust">Wind gust</string>
+    <string name="pressure">Pressure</string>
+    <string name="mbar">mbar</string>
+    <string name="humidity">Humidity</string>
+    <string name="percent">%</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="mm">mm</string>
+    <string name="uv_index">UV index</string>
+    <string name="visibility">Visibility</string>
+    <string name="km">Km</string>
+    <string name="clouds">Clouds</string>
+    <string name="air_quality">Air quality</string>
+    <string name="air_us_index">US EPA standard</string>
+    <string name="air_uk_index">UK Defra Index</string>
 </resources>

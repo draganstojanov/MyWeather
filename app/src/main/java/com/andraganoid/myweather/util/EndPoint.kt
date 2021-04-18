@@ -8,5 +8,10 @@ class EndPoint {
         const val FORECAST = "forecast.json"
         const val HISTORY = "history.json"
         const val ASTRONOMY = "astronomy.json"
+
+//        const val KEY = "0418c03ec5eb249dd5b5c3feb14f7d89"
+//        const val BASE_URL = "http:/api.openweathermap.org/data/2.5/"
+//        const val CURRENT_WEATHER = "weather"
+
     }
 }
