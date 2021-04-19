@@ -238,12 +238,12 @@
                     android:layout_width="0dp"
                     android:gravity="center"
                     android:text="@{@string/observed_at+`\n` + current.observedAt}"
-                    app:layout_constraintEnd_toStartOf="@id/refreshBrn"
+                    app:layout_constraintEnd_toStartOf="@id/refreshBtn"
                     app:layout_constraintStart_toEndOf="@id/updatedAt"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/refreshBrn"
+                    android:id="@+id/refreshBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_refresh"

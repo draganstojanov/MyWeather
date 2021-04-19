@@ -28,11 +28,11 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getCurrentWeather()) }
     }
 
-    private fun getAstronomy() {
+     fun getAstronomy() {
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy()) }
     }
 
-    private fun getForecast() {
+     fun getForecast() {
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getForecast()) }
     }
 

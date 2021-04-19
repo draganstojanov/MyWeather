@@ -10,17 +10,18 @@ import java.util.*
 
 object DateFormatter {
 
-    private val now: LocalDate?
-        get() = LocalDate.now()
+    private val now: LocalDateTime?
+        get() = LocalDateTime.now()
 
     private lateinit var formatter: DateTimeFormatter
     private lateinit var dateTime: LocalDateTime
     private lateinit var time: LocalTime
 
+    fun hourInDay(): Int = now?.hour!!
+
     fun todayWeekDay(): String? = now?.dayOfWeek?.getDisplayName(TextStyle.FULL_STANDALONE, Locale.ENGLISH)
 
     fun dateToday(): String = "${now?.dayOfMonth}.${now?.month?.getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)}"
-
 
     fun to24hFormat(timeString: String): String {
         formatter = DateTimeFormatter.ofPattern("hh:mm a")

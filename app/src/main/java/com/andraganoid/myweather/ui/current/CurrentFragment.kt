@@ -37,6 +37,10 @@ class CurrentFragment : Fragment() {
     }
 
     private fun setup() {
+        binding.refreshBtn.setOnClickListener {//todo cekaj 15 min
+            viewModel.getForecast()
+            viewModel.getAstronomy()
+        }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> {
