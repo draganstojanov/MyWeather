@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.ui.common
+package com.andraganoid.myweather.ui.current
 
 import com.andraganoid.myweather.util.decimalFormatter
 

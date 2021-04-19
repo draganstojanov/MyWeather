@@ -2,316 +2,35 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="currentResponse"
-            type="com.andraganoid.myweather.model.CurrentResponse" />
-    </data>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_lite"
-        android:fitsSystemWindows="true"
-        android:overScrollMode="never">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:orientation="vertical">
+            android:background="@color/grey_lite"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@color/grey_dark"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/orange_lite"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="4dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/orange_lite"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:tabTextColor="@color/white" />
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginBottom="4dp">-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:background="@color/grey_lite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabs" />
 
-            <!--                <TextView-->
-            <!--                    android:id="@+id/searchByNameBtn"-->
-            <!--                    style="@style/ButtonStyle"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="@dimen/search_item_height"-->
-            <!--                    android:layout_marginEnd="4dp"-->
-            <!--                    android:layout_marginBottom="4dp"-->
-            <!--                    android:text="@string/search_by_name"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/searchSavedBtn"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/searchSavedBtn"-->
-            <!--                    style="@style/ButtonStyle"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="@dimen/search_item_height"-->
-            <!--                    android:text="@string/search_saved"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toEndOf="@+id/searchByNameBtn"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--                <EditText-->
-            <!--                    android:id="@+id/locationChooser"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="@dimen/search_item_height"-->
-            <!--                    android:layout_marginTop="4dp"-->
-            <!--                    android:layout_marginEnd="4dp"-->
-            <!--                    android:background="@drawable/rounded_background"-->
-            <!--                    android:backgroundTint="@color/white"-->
-            <!--                    android:maxLines="1"-->
-            <!--                    android:paddingHorizontal="4dp"-->
-            <!--                    android:visibility="gone"-->
-            <!--                    app:layout_constraintEnd_toStartOf="@+id/chooserBtn"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@id/searchByNameBtn" />-->
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/chooserBtn"-->
-            <!--                    style="@style/ButtonStyle"-->
-            <!--                    android:layout_width="@dimen/search_item_height"-->
-            <!--                    android:layout_height="@dimen/search_item_height"-->
-            <!--                    android:layout_marginTop="4dp"-->
-            <!--                    android:text="@string/ok"-->
-            <!--                    android:visibility="gone"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@id/searchByNameBtn" />-->
-
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <!--            <Space-->
-            <!--                android:id="@+id/space0"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="4dp" />-->
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/locationContainer"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/location_color">
-
-                <TextView
-                    android:id="@+id/locationName"
-                    style="@style/StandardTextStyle"
-                    android:gravity="start"
-                    android:text="@{currentResponse.location.name}"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/locationCountry"
-                    style="@style/StandardTextStyle"
-                    android:gravity="start"
-                    android:text="@{currentResponse.location.country}"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/locationName" />
-
-                <TextView
-                    android:id="@+id/week_day_today"
-                    style="@style/StandardTextStyle"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/date_today"
-                    style="@style/StandardTextStyle"
-                    android:gravity="end"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:id="@+id/space1"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/currentContainer"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/current_color">
-
-                <TextView
-                    android:id="@+id/currentTemp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@{currentResponse.current.formattedTemp}"
-                    android:textColor="@color/white"
-                    android:textSize="80sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/currentImg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageView
-                    android:id="@+id/currentImg"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/currentTemp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/currentTemp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:setImage="@{currentResponse.current.condition.icon}" />
-
-                <Space
-                    android:id="@+id/space2"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/currentImg" />
-
-                <TextView
-                    android:id="@+id/feelsLike"
-                    style="@style/StandardTextStyle"
-                    android:layout_width="0dp"
-                    android:text="@{@string/feels_like+` `+ currentResponse.current.formattedFeelsLike}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@id/currentTemp"
-                    app:layout_constraintStart_toStartOf="@id/currentTemp"
-                    app:layout_constraintTop_toBottomOf="@id/space2" />
-
-                <TextView
-                    android:id="@+id/currentCondition"
-                    style="@style/StandardTextStyle"
-                    android:layout_width="0dp"
-                    android:text="@{currentResponse.current.condition.text}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@id/currentImg"
-                    app:layout_constraintStart_toStartOf="@id/currentImg"
-                    app:layout_constraintTop_toBottomOf="@id/space2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:id="@+id/space3"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailsRecView"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/details_color"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3" />
-
-            <Space
-                android:id="@+id/space4"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/airQualityContainer"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/air_quality_color">
-
-                <TextView
-                    android:id="@+id/airTitle"
-                    style="@style/StandardTextStyle"
-                    android:text="@string/air_quality"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/airUsIndex"
-                    style="@style/StandardTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@{@string/air_us_index+`\n` + currentResponse.current.airQuality.usEpaIndex}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/airUkIndex"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/airTitle" />
-
-                <TextView
-                    android:id="@+id/airUkIndex"
-                    style="@style/StandardTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@{@string/air_uk_index+`\n` + currentResponse.current.airQuality.gbDefraIndex}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/airUsIndex"
-                    app:layout_constraintTop_toBottomOf="@id/airTitle" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/airRecView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/airUsIndex"
-                    app:spanCount="3" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:id="@+id/space5"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/astroRecView"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/astro_color"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3" />
-
-            <Space
-                android:id="@+id/space6"
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/updateContainer"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/update_color">
-
-                <TextView
-                    android:id="@+id/updatedAt"
-                    style="@style/LabelTextStyle"
-                    android:layout_width="0dp"
-                    android:gravity="center"
-                    android:text="@{@string/updated_at+`\n` + currentResponse.location.updatedAt}"
-                    app:layout_constraintEnd_toStartOf="@+id/observedAt"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/observedAt"
-                    style="@style/LabelTextStyle"
-                    android:layout_width="0dp"
-                    android:gravity="center"
-                    android:text="@{@string/observed_at+`\n` + currentResponse.current.observedAt}"
-                    app:layout_constraintEnd_toStartOf="@id/refreshBrn"
-                    app:layout_constraintStart_toEndOf="@id/updatedAt"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/refreshBrn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_refresh"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/grey_lite"
-                    android:layout_marginEnd="8dp"/>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

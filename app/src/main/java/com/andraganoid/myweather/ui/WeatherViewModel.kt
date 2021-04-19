@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
 
@@ -19,18 +19,21 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         get() = _weatherData
 
     init {
-        getCurrentWeather()
+     //   getCurrentWeather()
         getAstronomy()
+        getForecast()
     }
 
     private fun getCurrentWeather() {
-        //   _weatherData.value = ResponseState.Error("current weather")
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getCurrentWeather()) }
     }
 
     private fun getAstronomy() {
-        //  _astronomyData.value = ResponseState.Error("current weather")
         viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy()) }
+    }
+
+    private fun getForecast() {
+        viewModelScope.launch { _weatherData.postValue(weatherRepository.getForecast()) }
     }
 
 }

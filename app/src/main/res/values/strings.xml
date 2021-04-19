@@ -36,4 +36,7 @@
     <string name="moon_illumination">Moon illumination</string>
     <string name="updated_at">Updated at</string>
     <string name="observed_at">Observed at</string>
+    <string name="now">Now</string>
+    <string name="forecast">Forecast</string>
+    <string name="search">Search</string>
 </resources>

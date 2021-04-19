@@ -21,7 +21,7 @@ fun setImage(iv: ImageView, url: String?) {
 }
 
 @BindingAdapter("weekDayShort")
-fun weekDayShort(tv: TextView, dateString: String?) {
+fun dayNameShort(tv: TextView, dateString: String?) {
     if (dateString != null) {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         val date: LocalDateTime = LocalDateTime.parse(dateString, formatter)

@@ -21,22 +21,26 @@ object DateFormatter {
 
     fun dateToday(): String = "${now?.dayOfMonth}.${now?.month?.getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)}"
 
-    fun weekDayShort(dateString: String?): String {
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        dateTime = LocalDateTime.parse(dateString, formatter)
-        return dateTime.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
-    }
 
     fun to24hFormat(timeString: String): String {
-        formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        formatter = DateTimeFormatter.ofPattern("hh:mm a")
         time = LocalTime.parse(timeString, formatter)
         return time.toString()
     }
 
     fun timeFromDate(dateString: String?): String {
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm")
         time = LocalTime.parse(dateString, formatter)
         return time.toString()
     }
+
+    fun dayNameShort(dateString: String?): String = dateOnly(dateString).dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toUpperCase(Locale.getDefault())
+
+    fun dayDate(dateString: String?): String = "${dateOnly(dateString).dayOfMonth}."
+
+    fun dayMonth(dateString: String?): String = dateOnly(dateString).month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toUpperCase(Locale.getDefault())
+
+    private fun dateOnly(dateString: String?): LocalDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
 
 }

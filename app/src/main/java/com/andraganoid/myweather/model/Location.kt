@@ -30,5 +30,5 @@ data class Location(
 	val tzId: String? = null
 ){
 	val updatedAt:String
-		get() =DateFormatter.timeFromDate(localtime)
+		get() = DateFormatter.timeFromDate(localtime)
 }

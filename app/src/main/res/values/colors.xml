@@ -21,6 +21,7 @@
     <color name="details_color">#3D7AAA</color>
     <color name="air_quality_color">#B84A71</color>
     <color name="update_color">@color/grey_dark</color>
+    <color name="day_color">#214AB3</color>
 
 
 </resources>
