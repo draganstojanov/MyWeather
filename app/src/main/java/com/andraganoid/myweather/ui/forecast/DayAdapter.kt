@@ -2,6 +2,7 @@ package com.andraganoid.myweather.ui.forecast
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.databinding.DayItemBinding
 import com.andraganoid.myweather.model.ForecastDay
@@ -19,7 +20,9 @@ class DayAdapter(private val dayList: List<ForecastDay?>?) : RecyclerView.Adapte
 
         fun bind(forecastDay: ForecastDay?) {
             binding.forecastDay = forecastDay
-            binding.root.setOnClickListener { }
+            val hourAdapter = HourAdapter(forecastDay?.hour)
+            binding.hoursRecView.adapter = hourAdapter
+            binding.dayContainer.setOnClickListener { binding.hoursRecView.isVisible = !binding.hoursRecView.isVisible }
         }
     }
 

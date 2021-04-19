@@ -1,5 +1,6 @@
 package com.andraganoid.myweather.model
 
+import com.andraganoid.myweather.util.temperatureFormatter
 import com.google.gson.annotations.SerializedName
 
 data class HourItem(
@@ -72,4 +73,8 @@ data class HourItem(
 
 	@field:SerializedName("pressure_mb")
 	val pressureMb: Double? = null
-)
+) {
+    val formattedTemp: String
+        get() = temperatureFormatter(tempC!!)
+
+}

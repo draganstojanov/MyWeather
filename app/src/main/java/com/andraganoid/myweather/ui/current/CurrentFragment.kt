@@ -24,9 +24,6 @@ import java.util.*
 @AndroidEntryPoint
 class CurrentFragment : Fragment() {
 
-//    @Inject
-//    lateinit var viewModel: CurrentViewModel
-
     private val viewModel: WeatherViewModel by activityViewModels()
 
     private lateinit var binding: CurrentFragmentBinding

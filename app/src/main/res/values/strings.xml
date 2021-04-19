@@ -39,4 +39,7 @@
     <string name="now">Now</string>
     <string name="forecast">Forecast</string>
     <string name="search">Search</string>
+    <string name="rain">Rain</string>
+    <string name="snow">Snow</string>
+    <string name="wind">Wind</string>
 </resources>

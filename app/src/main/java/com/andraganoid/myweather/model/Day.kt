@@ -1,5 +1,6 @@
 package com.andraganoid.myweather.model
 
+import com.andraganoid.myweather.util.decimalFormatter
 import com.andraganoid.myweather.util.temperatureFormatter
 import com.google.gson.annotations.SerializedName
 
@@ -44,6 +45,12 @@ data class Day(
 	@field:SerializedName("daily_will_it_snow")
 	val dailyWillItSnow: Int? = null
 ) {
-	val formattedTemp: String
-		get() = "${temperatureFormatter(mintempC!!)}-${temperatureFormatter(maxtempC!!)}"
-				}
+    val formattedTemp: String
+        get() = "${temperatureFormatter(mintempC!!)}-${temperatureFormatter(maxtempC!!)}"
+
+    val formattedWind: String
+        get() = decimalFormatter(maxwindKph!!)
+
+    val formattedHumidity: String
+        get() = decimalFormatter(avghumidity!!)
+}

@@ -6,6 +6,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/daysRecView"
         style="@style/ContainerStyle"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </layout>

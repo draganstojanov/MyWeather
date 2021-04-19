@@ -140,6 +140,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/detailsRecView"
                 style="@style/ContainerStyle"
+                android:overScrollMode="never"
                 android:backgroundTint="@color/details_color"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3" />
@@ -191,6 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/airUsIndex"
                     app:spanCount="3" />
@@ -205,6 +207,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/astroRecView"
                 style="@style/ContainerStyle"
+                android:overScrollMode="never"
                 android:backgroundTint="@color/astro_color"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3" />
