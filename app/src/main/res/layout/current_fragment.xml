@@ -18,7 +18,8 @@
         android:layout_height="match_parent"
         android:background="@color/grey_lite"
         android:fitsSystemWindows="true"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:visibility="gone">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -210,7 +211,8 @@
                 android:overScrollMode="never"
                 android:backgroundTint="@color/astro_color"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3" />
+                app:spanCount="3"
+                android:visibility="gone"/>
 
             <Space
                 android:id="@+id/space6"

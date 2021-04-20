@@ -6,7 +6,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.databinding.ItemViewBinding
 
-class ItemAdapter(private val itemList: ArrayList<ItemModel>) : RecyclerView.Adapter<ItemAdapter.ItemHolder>() {
+class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ItemHolder>() {
+
+    var itemList: ArrayList<ItemModel> = arrayListOf()
+        set(value) {
+            field = value
+            notifyItemRangeChanged(0,itemCount)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder =
         ItemHolder(ItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))

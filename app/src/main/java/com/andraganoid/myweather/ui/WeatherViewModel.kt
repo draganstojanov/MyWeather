@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andraganoid.myweather.api.WeatherRepository
+import com.andraganoid.myweather.model.QueryModel
 import com.andraganoid.myweather.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,21 +20,23 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
         get() = _weatherData
 
     init {
-     //   getCurrentWeather()
-        getAstronomy()
-        getForecast()
+     //   getForecast()
+      ///  getAstronomy()
+        //   getCurrentWeather()
     }
 
-    private fun getCurrentWeather() {
-        viewModelScope.launch { _weatherData.postValue(weatherRepository.getCurrentWeather()) }
+
+    fun getForecast(queryModel: QueryModel) {
+        viewModelScope.launch { _weatherData.postValue(weatherRepository.getForecast(queryModel)) }
+     //   getAstronomy(queryModel)
     }
 
-     fun getAstronomy() {
-        viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy()) }
+     fun getAstronomy(queryModel: QueryModel) {
+        viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy(queryModel)) }
     }
 
-     fun getForecast() {
-        viewModelScope.launch { _weatherData.postValue(weatherRepository.getForecast()) }
-    }
+    //    private fun getCurrentWeather() {
+//        viewModelScope.launch { _weatherData.postValue(weatherRepository.getCurrentWeather()) }
+//    }
 
 }

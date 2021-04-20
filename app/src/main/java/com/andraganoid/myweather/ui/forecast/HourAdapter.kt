@@ -13,9 +13,10 @@ import com.andraganoid.myweather.util.DateFormatter
 class HourAdapter(private val isToday:Boolean) : RecyclerView.Adapter<HourAdapter.HourHolder>() {
 
     private var hourList: List<HourItem?>? = arrayListOf()
+    private val hourInDay = DateFormatter.hourInDay();
 
-    fun setList(hList: List<HourItem?>) {//hList.size-DateFormatter.hourInDay()
-        hourList = if (isToday) hList.drop(5) else hList//TODO DDDDD
+    fun setList(hList: List<HourItem?>) {
+        hourList = if (isToday) hList.drop(hourInDay) else hList
         notifyDataSetChanged()
     }
 
@@ -30,11 +31,11 @@ class HourAdapter(private val isToday:Boolean) : RecyclerView.Adapter<HourAdapte
 
         fun bind(hourItem: HourItem?) {
                 binding.hour = hourItem
-                binding.hourValue = (DateFormatter.hourInDay() +layoutPosition).toString().padStart(2, '0')
-                val p = if (Integer.valueOf(hourItem?.chanceOfRain) > Integer.valueOf(hourItem?.chanceOfSnow)) hourItem?.chanceOfRain else hourItem?.chanceOfSnow
+                binding.hourValue = ((if (isToday) hourInDay else 0) +layoutPosition).toString().padStart(2, '0')
+                val p = if (Integer.valueOf(hourItem?.chanceOfRain!!) > Integer.valueOf(hourItem.chanceOfSnow!!)) hourItem.chanceOfRain else hourItem.chanceOfSnow
                 val prec = "$p ${binding.root.context.getString(R.string.percent)}"
                 binding.precipitation.text = prec
-                val wind = "${hourItem?.windDir} ${hourItem?.windKph} ${binding.root.context.getString(R.string.kmh)}"
+                val wind = "${hourItem.windDir} ${hourItem.windKph} ${binding.root.context.getString(R.string.kmh)}"
                 binding.wind.text = wind
             }
     }

@@ -77,29 +77,28 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/rainPerc"
+                    android:id="@+id/prChance"
                     style="@style/StandardTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_marginStart="4dp"
                     android:padding="0dp"
-                    android:text="@{@string/rain+` `+forecastDay.day.dailyChanceOfRain+` `+ @string/percent}"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@id/snowPerc"
+                    app:layout_constraintBottom_toTopOf="@id/prTotal"
                     app:layout_constraintStart_toEndOf="@id/verticalDivider"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
-                    android:id="@+id/snowPerc"
+                    android:id="@+id/prTotal"
                     style="@style/StandardTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_marginStart="4dp"
                     android:padding="0dp"
-                    android:text="@{@string/snow+` `+forecastDay.day.dailyChanceOfSnow+` `+ @string/percent}"
+                    android:text="@{@string/pr_total+` `+forecastDay.day.formattedTotalPrec+` `+ @string/mm}"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@+id/windSpeed"
                     app:layout_constraintStart_toEndOf="@id/verticalDivider"
-                    app:layout_constraintTop_toBottomOf="@id/rainPerc" />
+                    app:layout_constraintTop_toBottomOf="@id/prChance" />
 
                 <TextView
                     android:id="@+id/windSpeed"
@@ -111,7 +110,7 @@
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@id/humidity"
                     app:layout_constraintStart_toEndOf="@id/verticalDivider"
-                    app:layout_constraintTop_toBottomOf="@id/snowPerc" />
+                    app:layout_constraintTop_toBottomOf="@id/prTotal" />
 
 
                 <TextView

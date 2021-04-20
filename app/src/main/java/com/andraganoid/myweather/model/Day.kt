@@ -53,4 +53,7 @@ data class Day(
 
     val formattedHumidity: String
         get() = decimalFormatter(avghumidity!!)
+
+	val formattedTotalPrec: String
+		get() = decimalFormatter(totalprecipMm!!)
 }

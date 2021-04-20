@@ -23,6 +23,7 @@
     <color name="update_color">@color/grey_dark</color>
     <color name="day_color">#214AB3</color>
     <color name="hour_color">#36C8F4</color>
+    <color name="saved_color">@color/grey_dark</color>
 
 
 </resources>

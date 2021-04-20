@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.andraganoid.myweather.ui.current.CurrentFragment
 import com.andraganoid.myweather.ui.forecast.ForecastFragment
+import com.andraganoid.myweather.ui.search.SearchFragment
 
 
 class WeatherAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

@@ -30,6 +30,10 @@ class CurrentFragment : Fragment() {
 
     private lateinit var itemList: ArrayList<ItemModel>
 
+    lateinit var detailsAdapter: ItemAdapter
+    lateinit var astroAdapter: ItemAdapter
+    lateinit var airAdapter: ItemAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.current_fragment, container, false)
         setup()
@@ -37,18 +41,35 @@ class CurrentFragment : Fragment() {
     }
 
     private fun setup() {
+
+        detailsAdapter = ItemAdapter()
+        binding.detailsRecView.apply {
+            adapter = detailsAdapter
+            itemAnimator = null
+        }
+        airAdapter = ItemAdapter()
+        binding.airRecView.apply {
+            adapter = airAdapter
+            itemAnimator = null
+        }
+        astroAdapter = ItemAdapter()
+        binding.astroRecView.apply {
+            adapter = astroAdapter
+            itemAnimator = null
+        }
+
         binding.refreshBtn.setOnClickListener {//todo cekaj 15 min
-            viewModel.getForecast()
-            viewModel.getAstronomy()
+          //  viewModel.getForecast()
+          //  viewModel.getAstronomy()
         }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
             when (responseState) {
-                is ResponseState.Loading -> {
-                    Snackbar.make(binding.root, responseState.loaderMsg, Snackbar.LENGTH_LONG).show()//TODO
-                }
-                is ResponseState.Error -> {
-                    Snackbar.make(binding.root, responseState.errorMsg, Snackbar.LENGTH_LONG).show()//TODO
-                }
+//                is ResponseState.Loading -> {
+//                    Snackbar.make(binding.root, responseState.loaderMsg, Snackbar.LENGTH_LONG).show()//TODO
+//                }
+//                is ResponseState.Error -> {
+//                    Snackbar.make(binding.root, responseState.errorMsg, Snackbar.LENGTH_LONG).show()//TODO
+//                }
                 is ResponseState.CurrentWeather -> {
                     if ((responseState.currentResponse != null)) {
                         if (responseState.currentResponse.current != null && responseState.currentResponse.location != null) {
@@ -98,8 +119,8 @@ class CurrentFragment : Fragment() {
             add(ItemModel(label = getString(R.string.visibility), value = current?.visKm, unit = getString(R.string.km)))
             add(ItemModel(label = getString(R.string.clouds), value = current?.cloud, unit = getString(R.string.percent)))
         }
-        val detailsAdapter = ItemAdapter(itemList)
-        binding.detailsRecView.adapter = detailsAdapter
+        detailsAdapter.itemList = itemList
+
 
         itemList = arrayListOf<ItemModel>()
         itemList.apply {
@@ -110,8 +131,8 @@ class CurrentFragment : Fragment() {
             add(ItemModel(label = getString(R.string.pm2_5), value = current?.airQuality?.pm25, unit = getString(R.string.mgm3)))
             add(ItemModel(label = getString(R.string.pm10), value = current?.airQuality?.pm10, unit = getString(R.string.mgm3)))
         }
-        val airAdapter = ItemAdapter(itemList)
-        binding.airRecView.adapter = airAdapter
+
+        airAdapter.itemList = itemList
         binding.rootScrollView.isVisible = true
     }
 
@@ -126,8 +147,8 @@ class CurrentFragment : Fragment() {
             add(ItemModel(label = getString(R.string.moonset), value = DateFormatter.to24hFormat(astronomyResponse.astronomy.astro.moonset!!)))
             add(ItemModel(label = getString(R.string.moon_illumination), value = astronomyResponse.astronomy.astro.moonIllumination))
         }
-        val astroAdapter = ItemAdapter(itemList)
-        binding.astroRecView.adapter = astroAdapter
+
+        astroAdapter.itemList = itemList
         binding.astroRecView.isVisible = true
     }
 
