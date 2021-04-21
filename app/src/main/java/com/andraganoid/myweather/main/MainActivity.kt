@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.repeatLastCall()
+    }
+
     private fun setup() {
         viewModel.weatherData.observe(this, { responseState ->
             when (responseState) {

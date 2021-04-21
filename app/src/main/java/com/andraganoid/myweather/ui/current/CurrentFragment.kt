@@ -16,7 +16,7 @@ import com.andraganoid.myweather.model.Location
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.ResponseState
-import com.google.android.material.snackbar.Snackbar
+import com.andraganoid.myweather.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -59,17 +59,13 @@ class CurrentFragment : Fragment() {
         }
 
         binding.refreshBtn.setOnClickListener {//todo cekaj 15 min
-          //  viewModel.getForecast()
-          //  viewModel.getAstronomy()
+            viewModel.repeatLastCall()
         }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
             when (responseState) {
-//                is ResponseState.Loading -> {
-//                    Snackbar.make(binding.root, responseState.loaderMsg, Snackbar.LENGTH_LONG).show()//TODO
-//                }
-//                is ResponseState.Error -> {
-//                    Snackbar.make(binding.root, responseState.errorMsg, Snackbar.LENGTH_LONG).show()//TODO
-//                }
+                is ResponseState.Loading -> {
+                    binding.loading = true
+                }
                 is ResponseState.CurrentWeather -> {
                     if ((responseState.currentResponse != null)) {
                         if (responseState.currentResponse.current != null && responseState.currentResponse.location != null) {
@@ -100,8 +96,12 @@ class CurrentFragment : Fragment() {
         )
     }
 
-
     private fun setCurrentWeather(current: Current?, location: Location?) {
+        hideKeyboard(binding.root)
+        viewModel._showFragment.value = 0
+        binding.loading = false
+
+
         binding.current = current
         binding.location = location
         binding.weekDayToday.text = DateFormatter.todayWeekDay()

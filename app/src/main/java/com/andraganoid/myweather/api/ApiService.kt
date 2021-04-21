@@ -8,6 +8,7 @@ import com.andraganoid.myweather.util.EndPoint
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiService {
 
@@ -18,20 +19,12 @@ interface ApiService {
         @Query("aqi") aqi: String
     ): Response<CurrentResponse>
 
+    @JvmSuppressWildcards
     @GET(EndPoint.ASTRONOMY)
-    suspend fun getAstronomy(
-        @Query("key") key: String,
-        @Query("q") query: String,
-        @Query("dt") date: String,
-    ): Response<AstronomyResponse>
+    suspend fun getAstronomy(@QueryMap query: Map<String, Any>): Response<AstronomyResponse>
 
+    @JvmSuppressWildcards
     @GET(EndPoint.FORECAST)
-    suspend fun getForecast(
-        @Query("key") key: String,
-        @Query("q") query: String,
-        @Query("aqi") aqi: String,
-        @Query("alerts") alerts: String,
-        @Query("days") days: Int,
-    ): Response<ForecastResponse>
+    suspend fun getForecast(@QueryMap query: Map<String, Any>): Response<ForecastResponse>
 
 }

@@ -23,6 +23,8 @@ object DateFormatter {
 
     fun dateToday(): String = "${now?.dayOfMonth}.${now?.month?.getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)}"
 
+    fun dateQueryToday(): String = "${now?.year}-${now?.monthValue}-${now?.dayOfMonth}"
+
     fun to24hFormat(timeString: String): String {
         formatter = DateTimeFormatter.ofPattern("hh:mm a")
         time = LocalTime.parse(timeString, formatter)

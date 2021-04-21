@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.model
+package com.andraganoid.myweather.model.api
 
 data class QueryModel(
     val name: String? = null,

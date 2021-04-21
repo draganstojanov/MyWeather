@@ -41,7 +41,6 @@ class WeatherApiModule {
         return client.build()
     }
 
-    //Retrofit for networking
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson, baseUrl: String, client: OkHttpClient): Retrofit =
@@ -59,24 +58,4 @@ class WeatherApiModule {
 }
 
 
-//    //Api Service with retrofit instance
-//    @Provides
-//    @Singleton
-//    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-//
-//    //Class helper with apiService Interface
-//    @Provides
-//    @Singleton
-//    fun provideApiDatSource(apiService: ApiService) = ApiDataSource(apiService)
-//
-//
-//
-//
-//    @Provides
-//    @Singleton
-//    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
-//
-//    @Provides
-//    @Singleton
-//    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 

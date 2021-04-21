@@ -17,17 +17,10 @@ import java.util.*
 @AndroidEntryPoint
 class WeatherFragment : Fragment() {
 
-    // @Inject
-    // lateinit var viewModel: WeatherViewModel
-    //  private val viewModel: WeatherViewModel by  viewModels()
-    private val viewModel: WeatherViewModel by activityViewModels<WeatherViewModel>()
-
+    private val viewModel: WeatherViewModel by activityViewModels()
 
     private lateinit var binding: WeatherFragmentBinding
-
     private lateinit var tabTitle: List<String>
-    //   private lateinit var tabsLay: ViewGroup
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.weather_fragment, container, false)
@@ -45,18 +38,13 @@ class WeatherFragment : Fragment() {
             adapter = WeatherAdapter(this@WeatherFragment)
             offscreenPageLimit = tabTitle.size
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-//            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//                override fun onPageSelected(position: Int) {
-//                    super.onPageSelected(position)
-//                  //  tabsLay.getChildAt(position).setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.orange_dark))
-//                }
-//            })
         }
-
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
-        //   tabsLay = binding.tabs.getChildAt(0) as ViewGroup
+        viewModel.showFragment.observe(viewLifecycleOwner, {
+            binding.viewPager.currentItem = it
+        })
     }
 
 }

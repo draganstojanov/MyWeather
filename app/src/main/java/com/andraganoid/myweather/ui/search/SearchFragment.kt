@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
-import com.andraganoid.myweather.model.QueryModel
 import com.andraganoid.myweather.ui.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +46,7 @@ class SearchFragment : Fragment() {
     private fun getWeather() {
         val search = binding.locationName.text.toString()
         if (search.isNotEmpty()) {
-            viewModel.getForecast((QueryModel(name = search)))
+            viewModel.getForecast(search)
         }
     }
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.databinding.SearchItemBinding
-import com.andraganoid.myweather.model.QueryModel
+import com.andraganoid.myweather.model.api.QueryModel
 import com.andraganoid.myweather.ui.WeatherViewModel
 
 
