@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.ForecastFragmentBinding
-import com.andraganoid.myweather.model.ForecastResponse
+import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.ResponseState
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,20 +33,11 @@ class ForecastFragment : Fragment() {
 
     private fun setup() {
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
-            when (responseState) {
-                is ResponseState.Loading -> {
-                    Snackbar.make(binding.root, responseState.loaderMsg, Snackbar.LENGTH_LONG).show()//TODO
-                }
-                is ResponseState.Error -> {
-                    Snackbar.make(binding.root, responseState.errorMsg, Snackbar.LENGTH_LONG).show()//TODO
-                }
-
-                is ResponseState.ForecastData -> {
-                    if (responseState.forecastResponse != null) {
-                        setForecastWeather(responseState.forecastResponse)
-                    } else {
-                        binding.daysRecView.isVisible = false
-                    }
+            if (responseState is ResponseState.ForecastData) {
+                if (responseState.forecastResponse != null) {
+                    setForecastWeather(responseState.forecastResponse)
+                } else {
+                    binding.daysRecView.isVisible = false
                 }
             }
         }

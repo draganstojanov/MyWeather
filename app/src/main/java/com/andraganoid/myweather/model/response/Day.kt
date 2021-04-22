@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.model
+package com.andraganoid.myweather.model.response
 
 import com.andraganoid.myweather.util.decimalFormatter
 import com.andraganoid.myweather.util.temperatureFormatter
@@ -6,43 +6,43 @@ import com.google.gson.annotations.SerializedName
 
 data class Day(
 
-	@field:SerializedName("avgvis_km")
+    @field:SerializedName("avgvis_km")
 	val avgvisKm: Double? = null,
 
-	@field:SerializedName("uv")
+    @field:SerializedName("uv")
 	val uv: Double? = null,
 
-	@field:SerializedName("avgtemp_c")
+    @field:SerializedName("avgtemp_c")
 	val avgtempC: Double? = null,
 
-	@field:SerializedName("daily_chance_of_snow")
+    @field:SerializedName("daily_chance_of_snow")
 	val dailyChanceOfSnow: String? = null,
 
-	@field:SerializedName("maxtemp_c")
+    @field:SerializedName("maxtemp_c")
 	val maxtempC: Double? = null,
 
-	@field:SerializedName("mintemp_c")
+    @field:SerializedName("mintemp_c")
 	val mintempC: Double? = null,
 
-	@field:SerializedName("daily_will_it_rain")
+    @field:SerializedName("daily_will_it_rain")
 	val dailyWillItRain: Int? = null,
 
-	@field:SerializedName("avghumidity")
+    @field:SerializedName("avghumidity")
 	val avghumidity: Double? = null,
 
-	@field:SerializedName("condition")
+    @field:SerializedName("condition")
 	val condition: Condition? = null,
 
-	@field:SerializedName("maxwind_kph")
+    @field:SerializedName("maxwind_kph")
 	val maxwindKph: Double? = null,
 
-	@field:SerializedName("daily_chance_of_rain")
+    @field:SerializedName("daily_chance_of_rain")
 	val dailyChanceOfRain: String? = null,
 
-	@field:SerializedName("totalprecip_mm")
+    @field:SerializedName("totalprecip_mm")
 	val totalprecipMm: Double? = null,
 
-	@field:SerializedName("daily_will_it_snow")
+    @field:SerializedName("daily_will_it_snow")
 	val dailyWillItSnow: Int? = null
 ) {
     val formattedTemp: String

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,8 +19,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
 
-    lateinit var savedAdapter: SearchAdapter
-    lateinit var locationAdapter: SearchAdapter
+    lateinit var savedAdapter: SavedAdapter
+    lateinit var searchAdapter: SearchAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -31,16 +30,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun setup() {
-        savedAdapter = SearchAdapter(viewModel)
+        savedAdapter = SavedAdapter(viewModel)
         binding.savedRecView.adapter = savedAdapter
-        locationAdapter = SearchAdapter(viewModel)
-        binding.savedRecView.adapter = locationAdapter
+
+        searchAdapter = SearchAdapter(viewModel)
+        binding.locationRecView.adapter = searchAdapter
 
         binding.locationNameBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "CLICK", Toast.LENGTH_SHORT).show()
             getWeather()
         }
 
+        viewModel.getSavedQuerys().observe(viewLifecycleOwner, { savedList ->
+            savedAdapter.savedList = savedList
+        })
     }
 
     private fun getWeather() {

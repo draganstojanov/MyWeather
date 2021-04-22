@@ -1,12 +1,11 @@
 package com.andraganoid.myweather.ui.forecast
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.HourItemBinding
-import com.andraganoid.myweather.model.HourItem
+import com.andraganoid.myweather.model.response.HourItem
 import com.andraganoid.myweather.util.DateFormatter
 
 

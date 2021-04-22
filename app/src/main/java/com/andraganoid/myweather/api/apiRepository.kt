@@ -1,6 +1,6 @@
 package com.andraganoid.myweather.api
 
-import com.andraganoid.myweather.model.api.ResponseError
+import com.andraganoid.myweather.model.ResponseError
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.EndPoint
 import com.andraganoid.myweather.util.ResponseState
@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 
-class WeatherRepository @Inject constructor(private val apiService: ApiService) {
+class apiRepository @Inject constructor(private val apiService: ApiService) {
 
     private val type = object : TypeToken<ResponseError>() {}.type
 

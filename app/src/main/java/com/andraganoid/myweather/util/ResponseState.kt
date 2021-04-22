@@ -1,8 +1,8 @@
 package com.andraganoid.myweather.util
 
-import com.andraganoid.myweather.model.AstronomyResponse
-import com.andraganoid.myweather.model.CurrentResponse
-import com.andraganoid.myweather.model.ForecastResponse
+import com.andraganoid.myweather.model.response.AstronomyResponse
+import com.andraganoid.myweather.model.response.CurrentResponse
+import com.andraganoid.myweather.model.response.ForecastResponse
 
 sealed class ResponseState {
     data class Loading(val loaderMsg: String) : ResponseState()

@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class WeatherApiModule {
+class ApiModule {
 
     @Provides
     fun providesBaseUrl() = EndPoint.BASE_URL

@@ -19,7 +19,7 @@
             app:tabIndicatorHeight="4dp"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/orange_lite"
-            app:tabTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
             app:tabTextColor="@color/white" />
 
         <androidx.viewpager2.widget.ViewPager2

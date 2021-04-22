@@ -1,12 +1,12 @@
-package com.andraganoid.myweather.model
+package com.andraganoid.myweather.model.response
 
 import com.google.gson.annotations.SerializedName
 
 data class AstronomyResponse(
 
-	@field:SerializedName("location")
+    @field:SerializedName("location")
 	val location: Location? = null,
 
-	@field:SerializedName("astronomy")
+    @field:SerializedName("astronomy")
 	val astronomy: Astronomy? = null
 )

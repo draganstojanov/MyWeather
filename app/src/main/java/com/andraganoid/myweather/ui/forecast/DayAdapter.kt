@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.DayItemBinding
-import com.andraganoid.myweather.model.ForecastDay
-import com.andraganoid.myweather.model.HourItem
+import com.andraganoid.myweather.model.response.ForecastDay
+import com.andraganoid.myweather.model.response.HourItem
 
 
 class DayAdapter(private val dayList: List<ForecastDay?>?) : RecyclerView.Adapter<DayAdapter.DayHolder>() {
@@ -34,7 +34,7 @@ class DayAdapter(private val dayList: List<ForecastDay?>?) : RecyclerView.Adapte
             hourAdapter.setList(arrayListOf())
             binding.hoursRecView.adapter = hourAdapter
             binding.dayContainer.setOnClickListener {
-                hourAdapter.setList((if (visibility) arrayListOf() else forecastDay?.hour) as ArrayList<HourItem?>)
+                hourAdapter.setList((if (visibility) arrayListOf() else forecastDay.hour) as ArrayList<HourItem?>)
                 visibility = !visibility
             }
         }

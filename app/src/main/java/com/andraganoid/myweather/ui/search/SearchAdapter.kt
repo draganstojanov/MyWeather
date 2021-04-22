@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andraganoid.myweather.databinding.SearchItemBinding
-import com.andraganoid.myweather.model.api.QueryModel
+import com.andraganoid.myweather.model.response.Location
 import com.andraganoid.myweather.ui.WeatherViewModel
 
 
 class SearchAdapter(private val viewModel: WeatherViewModel) : RecyclerView.Adapter<SearchAdapter.SearchHolder>() {
 
-    var searchList: ArrayList<QueryModel> = arrayListOf()
+    var searchList: ArrayList<Location> = arrayListOf()
         set(value) {
             field = value
             notifyItemRangeChanged(0, itemCount)
@@ -25,9 +25,8 @@ class SearchAdapter(private val viewModel: WeatherViewModel) : RecyclerView.Adap
 
     inner class SearchHolder(private val binding: SearchItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: QueryModel) {
-            val s = "${item.name}, ${item.country}"
-            binding.searchItemTxt.text = s
+        fun bind(location: Location) {
+            binding.location = location
             binding.root.setOnClickListener {
                 // TODO viewModel.getWWW(item)
             }

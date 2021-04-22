@@ -1,9 +1,9 @@
 package com.andraganoid.myweather.api
 
 
-import com.andraganoid.myweather.model.AstronomyResponse
-import com.andraganoid.myweather.model.CurrentResponse
-import com.andraganoid.myweather.model.ForecastResponse
+import com.andraganoid.myweather.model.response.AstronomyResponse
+import com.andraganoid.myweather.model.response.CurrentResponse
+import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.util.EndPoint
 import retrofit2.Response
 import retrofit2.http.GET

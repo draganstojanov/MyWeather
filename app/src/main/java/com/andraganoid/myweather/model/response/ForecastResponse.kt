@@ -1,15 +1,15 @@
-package com.andraganoid.myweather.model
+package com.andraganoid.myweather.model.response
 
 import com.google.gson.annotations.SerializedName
 
 data class ForecastResponse(
 
-	@field:SerializedName("current")
+    @field:SerializedName("current")
 	val current: Current? = null,
 
-	@field:SerializedName("location")
+    @field:SerializedName("location")
 	val location: Location? = null,
 
-	@field:SerializedName("forecast")
+    @field:SerializedName("forecast")
 	val forecast: Forecast? = null
 )

@@ -1,18 +1,22 @@
 package com.andraganoid.myweather.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.andraganoid.myweather.api.WeatherRepository
+import androidx.lifecycle.*
+import com.andraganoid.myweather.api.apiRepository
+import com.andraganoid.myweather.database.DatabaseRepository
+import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.util.Prefs
 import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.util.toQueryModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository, private val prefs: Prefs) : ViewModel() {
+class WeatherViewModel @Inject constructor(
+    private val apiRepository: apiRepository,
+    private val dbRepository: DatabaseRepository,
+    private val prefs: Prefs
+) : ViewModel() {
 
     private val _weatherData = MutableLiveData<ResponseState>()
     val weatherData: LiveData<ResponseState>
@@ -24,9 +28,10 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
 
     fun getForecast(query: String) {
         viewModelScope.launch {
-            val response = weatherRepository.getForecast(query)
+            val response = apiRepository.getForecast(query)
             if (response is ResponseState.ForecastData) {
                 getAstronomy(query)
+                dbRepository.saveQuery(response.forecastResponse?.location?.toQueryModel().also { queryModel -> queryModel?.query = query }!!)
             }
             _weatherData.postValue(response)
             prefs.saveLastCalledQuery(query)
@@ -34,12 +39,20 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     }
 
     private fun getAstronomy(query: String) {
-        viewModelScope.launch { _weatherData.postValue(weatherRepository.getAstronomy(query)) }
+        viewModelScope.launch { _weatherData.postValue(apiRepository.getAstronomy(query)) }
     }
-
 
     fun repeatLastCall() {
         getForecast(prefs.getLastCalledQuery().toString())
     }
 
+    fun getSavedQuerys() = dbRepository.getAllQuerys().asLiveData()
+
+    fun deleteSavedQuery(query: QueryModel) {
+        viewModelScope.launch {
+            dbRepository.deleteQuery(query)
+        }
+    }
+
 }
+

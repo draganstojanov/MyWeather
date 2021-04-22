@@ -6,13 +6,14 @@
     <data>
 
         <variable
-            name="location"
-            type="com.andraganoid.myweather.model.response.Location" />
+            name="query"
+            type="com.andraganoid.myweather.model.db.QueryModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_item_height"
+        android:layout_marginTop="4dp"
         android:background="@drawable/rounded_background"
         android:backgroundTint="@color/white"
         android:paddingHorizontal="4dp">
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="4dp"
-            android:text="@{location.name+`, `}"
+            android:text="@{query.name+`, `}"
             android:textColor="@color/grey_dark"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -32,16 +33,30 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/countryTxt"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="4dp"
-            android:text="@{location.country}"
+            android:ellipsize="end"
+            android:lines="1"
+            android:paddingEnd="4dp"
+            android:text="@{query.country}"
             android:textColor="@color/grey_dark"
             android:textSize="14sp"
             app:layout_constraintBaseline_toBaselineOf="@id/nameTxt"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/deleteBtn"
             app:layout_constraintStart_toEndOf="@id/nameTxt"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/orange_dark" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

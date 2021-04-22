@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.model.api
+package com.andraganoid.myweather.model
 
 data class ResponseError(
 	val error: Error? = null

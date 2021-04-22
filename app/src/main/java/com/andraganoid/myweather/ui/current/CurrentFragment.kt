@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.CurrentFragmentBinding
-import com.andraganoid.myweather.model.AstronomyResponse
-import com.andraganoid.myweather.model.Current
-import com.andraganoid.myweather.model.Location
+import com.andraganoid.myweather.model.response.AstronomyResponse
+import com.andraganoid.myweather.model.response.Current
+import com.andraganoid.myweather.model.response.Location
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.ResponseState
