@@ -78,30 +78,36 @@ class SearchFragment : Fragment() {
     }
 
 
-//    private fun getLocation() {
-//        requestPermissions(
-//            Manifest.permission.ACCESS_COARSE_LOCATION,
-//            Manifest.permission.ACCESS_FINE_LOCATION
-//        ) {
-//            requestCode = 4
-//            resultCallback = {
-//                when (this) {
-//                    is PermissionResult.PermissionGranted -> {
-//                        getLocationData()
-//                    }
-//                    is PermissionResult.PermissionDenied -> {
-//                        Snackbar.make(binding.root, "Location permission denied. Try again.", Snackbar.LENGTH_LONG).show()
-//                    }
-//                    is PermissionResult.PermissionDeniedPermanently -> {
-//                        Snackbar.make(binding.root, "Location permission denied. Try manually at device settings.", Snackbar.LENGTH_LONG).show()
-//                    }
-//                    is PermissionResult.ShowRational -> {
-//                        Snackbar.make(binding.root, "Second chance!", Snackbar.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private fun getLocation() {
+        viewModel.canRepeatLastCall = false
+        requestPermissions(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) {
+            requestCode = 4
+            resultCallback = {
+                when (this) {
+                    is PermissionResult.PermissionGranted -> {
+                        getLocationData()
+                    }
+                    is PermissionResult.PermissionDenied -> {
+                        Snackbar.make(binding.root, "Location permission denied. Try again.", Snackbar.LENGTH_LONG).show()
+                    }
+                    is PermissionResult.PermissionDeniedPermanently -> {
+                        Snackbar.make(binding.root, "Location permission denied. Try manually at device settings.", Snackbar.LENGTH_LONG).show()
+                    }
+                    is PermissionResult.ShowRational -> {
+                        AlertDialog.Builder(requireActivity())
+                            .setTitle("Location permission")//todo
+                            .setMessage("This app requires access to get Device location.")
+                            .setPositiveButton("Ask me") { _, _ -> getLocation() }
+                            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                            .show()
+                    }
+                }
+            }
+        }
+    }
 
     @SuppressLint("MissingPermission")
     private fun getLocationData() {
@@ -122,50 +128,50 @@ class SearchFragment : Fragment() {
     }
 
 
-    private fun getLocation() {
+//    private fun getLocation() {
+//
+//        logA("1")
+//        when {
+//
+//            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+//                    && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+//            -> getLocationData()
+//
+//            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+//                logA("4")
+//                AlertDialog.Builder(requireActivity())
+//                    .setTitle("Location permission")//todo
+//                    .setMessage("This app requires access to get Device location.")
+//                    .setPositiveButton("Ask me") { _, _ -> requestPermission() }
+//                    .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+//                    .show()
+//            }
+//            else -> {
+//                logA("5")
+//                requestPermission()
+//            }
+//        }
+//
+//    }
 
-        logA("1")
-        when {
-
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-            -> getLocationData()
-
-            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                logA("4")
-                AlertDialog.Builder(requireActivity())
-                    .setTitle("Location permission")//todo
-                    .setMessage("This app requires access to get Device location.")
-                    .setPositiveButton("Ask me") { _, _ -> requestPermission() }
-                    .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                    .show()
-            }
-            else -> {
-                logA("5")
-                requestPermission()
-            }
-        }
-
-    }
-
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-
-        var isGranted = true
-        permissions.entries.forEach {
-            isGranted = isGranted && it.value
-        }
-        if (isGranted) {
-            getLocationData()
-        } else {
-            Snackbar.make(binding.root, "Location permission denied. Try manually at device settings.", Snackbar.LENGTH_LONG).show()
-        }
-        viewModel.canRepeatLastCall = false
-    }
-
-    private fun requestPermission() {
-        logA("6")
-        viewModel.canRepeatLastCall = false
-        requestPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION))
-    }
+//    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+//
+//        var isGranted = true
+//        permissions.entries.forEach {
+//            isGranted = isGranted && it.value
+//        }
+//        if (isGranted) {
+//            getLocationData()
+//        } else {
+//            Snackbar.make(binding.root, "Location permission denied. Try manually at device settings.", Snackbar.LENGTH_LONG).show()
+//        }
+//        viewModel.canRepeatLastCall = false
+//    }
+//
+//    private fun requestPermission() {
+//        logA("6")
+//        viewModel.canRepeatLastCall = false
+//        requestPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION))
+////    }
 
 }
