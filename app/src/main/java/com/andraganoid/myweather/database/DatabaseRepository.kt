@@ -13,6 +13,5 @@ class DatabaseRepository @Inject constructor(private val queryDao: WeatherQueryD
         queryDao.deleteQuery(query)
     }
 
-
     fun getAllQuerys() = queryDao.allQuerys()
 }

@@ -28,7 +28,7 @@ data class Location(
 
 	@field:SerializedName("tz_id")
 	val tzId: String? = null
-){
-	val updatedAt:String
-		get() = DateFormatter.timeFromDate(localtime)
+) {
+    val updatedAt: String
+        get() = DateFormatter.timeFromDate(localtime)
 }

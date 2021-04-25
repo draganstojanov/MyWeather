@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class AstronomyResponse(
 
     @field:SerializedName("location")
-	val location: Location? = null,
+    val location: Location? = null,
 
     @field:SerializedName("astronomy")
-	val astronomy: Astronomy? = null
+    val astronomy: Astronomy? = null
 )

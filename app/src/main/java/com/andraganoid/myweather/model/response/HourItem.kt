@@ -6,73 +6,73 @@ import com.google.gson.annotations.SerializedName
 data class HourItem(
 
     @field:SerializedName("will_it_rain")
-	val willItRain: Int? = null,
+    val willItRain: Int? = null,
 
     @field:SerializedName("feelslike_c")
-	val feelslikeC: Double? = null,
+    val feelslikeC: Double? = null,
 
     @field:SerializedName("uv")
-	val uv: Double? = null,
+    val uv: Double? = null,
 
     @field:SerializedName("wind_degree")
-	val windDegree: Int? = null,
+    val windDegree: Int? = null,
 
     @field:SerializedName("dewpoint_c")
-	val dewpointC: Double? = null,
+    val dewpointC: Double? = null,
 
     @field:SerializedName("windchill_c")
-	val windchillC: Double? = null,
+    val windchillC: Double? = null,
 
     @field:SerializedName("is_day")
-	val isDay: Int? = null,
+    val isDay: Int? = null,
 
     @field:SerializedName("heatindex_c")
-	val heatindexC: Double? = null,
+    val heatindexC: Double? = null,
 
     @field:SerializedName("wind_dir")
-	val windDir: String? = null,
+    val windDir: String? = null,
 
     @field:SerializedName("temp_c")
-	val tempC: Double? = null,
+    val tempC: Double? = null,
 
     @field:SerializedName("chance_of_rain")
-	val chanceOfRain: String? = null,
+    val chanceOfRain: String? = null,
 
     @field:SerializedName("gust_kph")
-	val gustKph: Double? = null,
+    val gustKph: Double? = null,
 
     @field:SerializedName("precip_mm")
-	val precipMm: Double? = null,
+    val precipMm: Double? = null,
 
     @field:SerializedName("cloud")
-	val cloud: Int? = null,
+    val cloud: Int? = null,
 
     @field:SerializedName("wind_kph")
-	val windKph: Double? = null,
+    val windKph: Double? = null,
 
     @field:SerializedName("condition")
-	val condition: Condition? = null,
+    val condition: Condition? = null,
 
     @field:SerializedName("will_it_snow")
-	val willItSnow: Int? = null,
+    val willItSnow: Int? = null,
 
     @field:SerializedName("vis_km")
-	val visKm: Double? = null,
+    val visKm: Double? = null,
 
     @field:SerializedName("time_epoch")
-	val timeEpoch: Int? = null,
+    val timeEpoch: Int? = null,
 
     @field:SerializedName("humidity")
-	val humidity: Int? = null,
+    val humidity: Int? = null,
 
     @field:SerializedName("time")
-	val time: String? = null,
+    val time: String? = null,
 
     @field:SerializedName("chance_of_snow")
-	val chanceOfSnow: String? = null,
+    val chanceOfSnow: String? = null,
 
     @field:SerializedName("pressure_mb")
-	val pressureMb: Double? = null
+    val pressureMb: Double? = null
 ) {
     val formattedTemp: String
         get() = temperatureFormatter(tempC!!)

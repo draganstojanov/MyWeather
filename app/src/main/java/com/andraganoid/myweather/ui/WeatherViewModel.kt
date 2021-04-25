@@ -1,7 +1,7 @@
 package com.andraganoid.myweather.ui
 
 import androidx.lifecycle.*
-import com.andraganoid.myweather.api.apiRepository
+import com.andraganoid.myweather.api.ApiRepository
 import com.andraganoid.myweather.database.DatabaseRepository
 import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.util.Prefs
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val apiRepository: apiRepository,
+    private val apiRepository: ApiRepository,
     private val dbRepository: DatabaseRepository,
     private val prefs: Prefs
 ) : ViewModel() {
@@ -26,7 +26,7 @@ class WeatherViewModel @Inject constructor(
     val showFragment: LiveData<Int>
         get() = _showFragment
 
-    private val _getLocation = MutableLiveData<Boolean>(false)
+    private val _getLocation = MutableLiveData(false)
     val getLocation: LiveData<Boolean>
         get() = _getLocation
 

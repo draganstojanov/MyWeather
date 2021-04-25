@@ -11,7 +11,7 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ItemHolder>() {
     var itemList: ArrayList<ItemModel> = arrayListOf()
         set(value) {
             field = value
-            notifyItemRangeChanged(0,itemCount)
+            notifyItemRangeChanged(0, itemCount)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder =

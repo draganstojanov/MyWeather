@@ -3,7 +3,7 @@ package com.andraganoid.myweather.di
 
 import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
-import com.andraganoid.myweather.util.EndPoint
+import com.andraganoid.myweather.util.EndPoints
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -23,7 +23,7 @@ import javax.inject.Singleton
 class ApiModule {
 
     @Provides
-    fun providesBaseUrl() = EndPoint.BASE_URL
+    fun providesBaseUrl() = EndPoints.BASE_URL
 
     @Provides
     fun providesGson(): Gson = GsonBuilder().setLenient().create()

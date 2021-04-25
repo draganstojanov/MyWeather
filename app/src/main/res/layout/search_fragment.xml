@@ -21,38 +21,19 @@
                 android:layout_height="4dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/locationContainer"
-                style="@style/ContainerStyle"
-                android:backgroundTint="@color/saved_color"
-                android:orientation="vertical"
-                android:paddingHorizontal="0dp"
-                app:layout_constraintTop_toBottomOf="@id/space0">
-
-                <TextView
-                    android:id="@+id/getLocationBtn"
-                    style="@style/ButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/search_item_height"
-                    android:text="@string/get_location"
-                    app:layout_constraintTop_toBottomOf="@id/space0" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/locationRecView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="never"
-                    android:visibility="gone"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
+            <TextView
+                android:id="@+id/getLocationBtn"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_item_height"
+                android:text="@string/get_location"
+                app:layout_constraintTop_toBottomOf="@id/space0" />
 
             <Space
                 android:id="@+id/space1"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                app:layout_constraintTop_toBottomOf="@id/locationContainer" />
+                app:layout_constraintTop_toBottomOf="@id/getLocationBtn" />
 
             <EditText
                 android:id="@+id/locationName"

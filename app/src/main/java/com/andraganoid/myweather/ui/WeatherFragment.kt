@@ -18,7 +18,6 @@ import java.util.*
 class WeatherFragment : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels()
-
     private lateinit var binding: WeatherFragmentBinding
     private lateinit var tabTitle: List<String>
 

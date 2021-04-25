@@ -58,7 +58,7 @@ class CurrentFragment : Fragment() {
             itemAnimator = null
         }
 
-        binding.refreshBtn.setOnClickListener {//todo cekaj 15 min
+        binding.refreshBtn.setOnClickListener {
             viewModel.repeatLastCall()
         }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
@@ -75,7 +75,7 @@ class CurrentFragment : Fragment() {
                         binding.rootScrollView.isVisible = false
                     }
                 }
-                is ResponseState.AstroData -> {
+                is ResponseState.AstronomyData -> {
                     if (responseState.astronomyResponse != null) {
                         setAstronomy(responseState.astronomyResponse)
                     } else {
@@ -120,7 +120,6 @@ class CurrentFragment : Fragment() {
             add(ItemModel(label = getString(R.string.clouds), value = current?.cloud, unit = getString(R.string.percent)))
         }
         detailsAdapter.itemList = itemList
-
 
         itemList = arrayListOf<ItemModel>()
         itemList.apply {

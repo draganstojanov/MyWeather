@@ -19,11 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ForecastFragment : Fragment() {
 
-
     private val viewModel: WeatherViewModel by activityViewModels()
-
     private lateinit var binding: ForecastFragmentBinding
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.forecast_fragment, container, false)
@@ -51,6 +48,5 @@ class ForecastFragment : Fragment() {
             isVisible = true
         }
     }
-
 
 }
