@@ -26,6 +26,12 @@ class WeatherViewModel @Inject constructor(
     val showFragment: LiveData<Int>
         get() = _showFragment
 
+    private val _getLocation = MutableLiveData<Boolean>(false)
+    val getLocation: LiveData<Boolean>
+        get() = _getLocation
+
+    var canRepeatLastCall = true
+
     fun getForecast(query: String) {
         viewModelScope.launch {
             val response = apiRepository.getForecast(query)
@@ -43,7 +49,15 @@ class WeatherViewModel @Inject constructor(
     }
 
     fun repeatLastCall() {
-        getForecast(prefs.getLastCalledQuery().toString())
+        if (canRepeatLastCall) {
+            prefs.getLastCalledQuery().toString().also {
+                if (it.isNotEmpty()) {
+                    getForecast(it)
+                } else {
+                    _getLocation.value = true
+                }
+            }
+        }
     }
 
     fun getSavedQuerys() = dbRepository.getAllQuerys().asLiveData()
