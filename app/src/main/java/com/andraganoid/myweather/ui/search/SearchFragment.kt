@@ -97,6 +97,7 @@ class SearchFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun getLocationData() {
+
         fusedLocationClient.locationAvailability.addOnSuccessListener { logA(it) }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
