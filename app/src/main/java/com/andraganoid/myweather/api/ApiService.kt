@@ -1,25 +1,21 @@
 package com.andraganoid.myweather.api
 
-import com.andraganoid.myweather.model.CurrentWeatherResponse
-import com.andraganoid.myweather.util.EndPoint
+
+import com.andraganoid.myweather.model.response.AstronomyResponse
+import com.andraganoid.myweather.model.response.ForecastResponse
+import com.andraganoid.myweather.util.EndPoints
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiService {
-//TODO
 
-    @GET(EndPoint.CURRENT_WEATHER)
-    suspend fun getCurrentWeather(
+    @JvmSuppressWildcards
+    @GET(EndPoints.ASTRONOMY)
+    suspend fun getAstronomy(@QueryMap query: Map<String, Any>): Response<AstronomyResponse>
 
-        @Query("id") cityId: Int,
-        @Query("appid") appId: String
+    @JvmSuppressWildcards
+    @GET(EndPoints.FORECAST)
+    suspend fun getForecast(@QueryMap query: Map<String, Any>): Response<ForecastResponse>
 
-//        @Query("api_key") access_key: String,
-//        @Query("from") from: String,
-//        @Query("to") to: String,
-//        @Query("amount") amount: Double
-    ): Response<CurrentWeatherResponse>
-
-    //  792680
 }

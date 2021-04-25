@@ -1,8 +1,9 @@
 package com.andraganoid.myweather.di
 
-import androidx.databinding.library.BuildConfig
+
+import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
-import com.andraganoid.myweather.util.EndPoint
+import com.andraganoid.myweather.util.EndPoints
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -19,30 +20,27 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class WeatherApiModule {
+class ApiModule {
 
     @Provides
-    fun providesBaseUrl() = EndPoint.BASE_URL
+    fun providesBaseUrl() = EndPoints.BASE_URL
 
     @Provides
     fun providesGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
-    fun providesClient() = if (BuildConfig.DEBUG) {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    } else {
-        OkHttpClient
-            .Builder()
+    fun providesClient(): OkHttpClient {
+        val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .build()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            client.addInterceptor(loggingInterceptor)
+        }
+        return client.build()
     }
 
-    //Retrofit for networking
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson, baseUrl: String, client: OkHttpClient): Retrofit =
@@ -60,24 +58,4 @@ class WeatherApiModule {
 }
 
 
-//    //Api Service with retrofit instance
-//    @Provides
-//    @Singleton
-//    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-//
-//    //Class helper with apiService Interface
-//    @Provides
-//    @Singleton
-//    fun provideApiDatSource(apiService: ApiService) = ApiDataSource(apiService)
-//
-//
-//
-//
-//    @Provides
-//    @Singleton
-//    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
-//
-//    @Provides
-//    @Singleton
-//    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 

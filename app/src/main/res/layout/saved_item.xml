@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="query"
+            type="com.andraganoid.myweather.model.db.QueryModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_item_height"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/white"
+        android:paddingHorizontal="4dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="4dp"
+            android:text="@{query.name+`, `}"
+            android:textColor="@color/grey_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/countryTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:paddingEnd="4dp"
+            android:text="@{query.country}"
+            android:textColor="@color/grey_dark"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/nameTxt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/deleteBtn"
+            app:layout_constraintStart_toEndOf="@id/nameTxt"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/orange_dark" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

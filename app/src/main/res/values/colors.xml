@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="grey_lite">#C0C0C0</color>
+    <color name="grey_dark">#3E3E3E</color>
+
+    <color name="orange_lite">#FFC107</color>
+    <color name="orange_dark">#FF6F00</color>
+
+    <color name="background_color">@color/grey_lite</color>
+    <color name="location_color">#D69B43</color>
+    <color name="current_color">#009688</color>
+    <color name="astro_color">#40611E</color>
+    <color name="details_color">#3D7AAA</color>
+    <color name="air_quality_color">#B84A71</color>
+    <color name="update_color">@color/grey_dark</color>
+    <color name="day_color">#214AB3</color>
+    <color name="hour_color">#36C8F4</color>
+    <color name="saved_color">@color/grey_dark</color>
+
+
 </resources>

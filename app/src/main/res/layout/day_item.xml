@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="forecastDay"
+            type="com.andraganoid.myweather.model.response.ForecastDay" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/rootScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fitsSystemWindows="true"
+        android:overScrollMode="never">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dayContainer"
+                style="@style/ContainerStyle"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/day_color">
+
+                <TextView
+                    android:id="@+id/dayName"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="48dp"
+                    android:padding="0dp"
+                    android:text="@{forecastDay.dayName}"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/dayDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/dayDate"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="48dp"
+                    android:padding="0dp"
+
+                    android:text="@{forecastDay.dayDate}"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/dayMonth"
+                    app:layout_constraintEnd_toEndOf="@id/dayName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dayName" />
+
+                <TextView
+                    android:id="@+id/dayMonth"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="48dp"
+                    android:padding="0dp"
+                    android:text="@{forecastDay.dayMonth}"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/dayName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dayDate" />
+
+                <View
+                    android:id="@+id/verticalDivider"
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/rounded_background"
+                    android:backgroundTint="@color/grey_lite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dayName"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/prChance"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:padding="0dp"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/prTotal"
+                    app:layout_constraintStart_toEndOf="@id/verticalDivider"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/prTotal"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:padding="0dp"
+                    android:text="@{@string/pr_total+` `+forecastDay.day.formattedTotalPrec+` `+ @string/mm}"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/windSpeed"
+                    app:layout_constraintStart_toEndOf="@id/verticalDivider"
+                    app:layout_constraintTop_toBottomOf="@id/prChance" />
+
+                <TextView
+                    android:id="@+id/windSpeed"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:padding="0dp"
+                    android:text="@{@string/wind+` `+forecastDay.day.formattedWind+` `+ @string/kmh}"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/humidity"
+                    app:layout_constraintStart_toEndOf="@id/verticalDivider"
+                    app:layout_constraintTop_toBottomOf="@id/prTotal" />
+
+
+                <TextView
+                    android:id="@+id/humidity"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:padding="0dp"
+                    android:text="@{@string/humidity+` `+forecastDay.day.formattedHumidity+` `+ @string/percent}"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/verticalDivider"
+                    app:layout_constraintTop_toBottomOf="@id/windSpeed" />
+
+
+                <ImageView
+                    android:id="@+id/currentImg"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setImage="@{forecastDay.day.condition.icon}" />
+
+                <TextView
+                    android:id="@+id/currentCondition"
+                    style="@style/StandardTextStyle"
+                    android:layout_width="wrap_content"
+                    android:text="@{forecastDay.day.condition.text}"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/currentImg" />
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{forecastDay.day.formattedTemp}"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/currentImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hoursRecView"
+                style="@style/ContainerStyle"
+                android:overScrollMode="never"
+                android:padding="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
