@@ -27,9 +27,7 @@ class CurrentFragment : Fragment() {
     private val viewModel: WeatherViewModel by activityViewModels()
 
     private lateinit var binding: CurrentFragmentBinding
-
     private lateinit var itemList: ArrayList<ItemModel>
-
     lateinit var detailsAdapter: ItemAdapter
     lateinit var astroAdapter: ItemAdapter
     lateinit var airAdapter: ItemAdapter

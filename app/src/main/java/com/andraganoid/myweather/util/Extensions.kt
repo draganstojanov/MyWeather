@@ -21,11 +21,6 @@ fun temperatureFormatter(temp: Number): String {
     return "${decimalFormatter(temp)}\u00B0"
 }
 
-fun Fragment.hideKeyboard(view: View) {
-    val imm: InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
-}
-
 fun Location.toQueryModel() = QueryModel(
     name = name,
     country = country,
