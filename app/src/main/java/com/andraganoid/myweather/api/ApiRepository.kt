@@ -13,13 +13,13 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class ApiRepository @Inject constructor(private val apiService: ApiService) {
+class ApiRepository  @Inject constructor(private val apiService: ApiService,private val gson:Gson) {
 
     private val type = object : TypeToken<ResponseError>() {}.type
 
     suspend fun getAstronomy(query: String): ResponseState {
 
-        var response: Response<AstronomyResponse>? = null
+        val response: Response<AstronomyResponse>?
 
         if (App.networkStatus) {
 
@@ -35,7 +35,7 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) {
                 if (response.isSuccessful) {
                     ResponseState.AstronomyData(response.body())
                 } else {
-                    val errorResponse: ResponseError? = Gson().fromJson(response.errorBody()!!.charStream(), type)
+                    val errorResponse: ResponseError? = gson.fromJson(response.errorBody()!!.charStream(), type)
                     ResponseState.Error(errorResponse?.error?.message.toString())
                 }
             } catch (exc: Exception) {
@@ -48,7 +48,7 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getForecast(query: String): ResponseState {
 
-        var response: Response<ForecastResponse>? = null
+        val response: Response<ForecastResponse>?
 
         if (App.networkStatus) {
             response = apiService.getForecast(
@@ -64,14 +64,13 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) {
                 if (response.isSuccessful) {
                     ResponseState.ForecastData(response.body())
                 } else {
-                    val errorResponse: ResponseError? = Gson().fromJson(response.errorBody()!!.charStream(), type)
+                    val errorResponse: ResponseError? = gson.fromJson(response.errorBody()!!.charStream(), type)
                     ResponseState.Error(errorResponse?.error?.message.toString())
                 }
             } catch (exc: Exception) {
                 (ResponseState.Error(exc.localizedMessage!!))
             }
-
-
+            
         } else {
             return ResponseState.Error("No network")
         }
