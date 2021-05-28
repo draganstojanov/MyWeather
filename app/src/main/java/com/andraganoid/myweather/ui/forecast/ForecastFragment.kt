@@ -30,12 +30,8 @@ class ForecastFragment : Fragment() {
 
     private fun setup() {
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
-            if (responseState is ResponseState.ForecastData) {
-                if (responseState.forecastResponse != null) {
-                    setForecastWeather(responseState.forecastResponse)
-                } else {
-                    binding.daysRecView.isVisible = false
-                }
+            if (responseState is ResponseState.ResponseData && responseState.responseData is ForecastResponse) {
+                setForecastWeather(responseState.responseData)
             }
         }
         )

@@ -10,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.CurrentFragmentBinding
-import com.andraganoid.myweather.model.response.AstronomyResponse
-import com.andraganoid.myweather.model.response.Current
-import com.andraganoid.myweather.model.response.Location
+import com.andraganoid.myweather.model.response.*
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.ResponseState
@@ -60,39 +58,42 @@ class CurrentFragment : Fragment() {
             viewModel.repeatLastCall()
         }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
-            when (responseState) {
-                is ResponseState.Loading -> {
-                    binding.loading = true
-                }
-                is ResponseState.CurrentWeather -> {
-                    if ((responseState.currentResponse != null)) {
-                        if (responseState.currentResponse.current != null && responseState.currentResponse.location != null) {
-                            setCurrentWeather(responseState.currentResponse.current, responseState.currentResponse.location)
+            if (responseState is ResponseState.ResponseData) {
+                val resp = responseState.responseData
+                when (resp) {
+                    is CurrentResponse -> {
+                        if (resp.current != null) {
+                            if (resp.location != null) {
+                                setCurrentWeather(resp.current, resp.location)
+                            }
+                        } else {
+                            binding.rootScrollView.isVisible = false
                         }
-                    } else {
-                        binding.rootScrollView.isVisible = false
                     }
-                }
-                is ResponseState.AstronomyData -> {
-                    if (responseState.astronomyResponse != null) {
-                        setAstronomy(responseState.astronomyResponse)
-                    } else {
-                        binding.astroRecView.isVisible = false
-                    }
-                }
-                is ResponseState.ForecastData -> {
-                    if (responseState.forecastResponse != null) {
-                        if (responseState.forecastResponse.current != null && responseState.forecastResponse.location != null) {
-                            setCurrentWeather(responseState.forecastResponse.current, responseState.forecastResponse.location)
+                    is AstronomyResponse -> {
+                        if (resp.astronomy != null) {
+                            setAstronomy(resp)
+                        } else {
+                            binding.astroRecView.isVisible = false
                         }
-                    } else {
-                        binding.rootScrollView.isVisible = false
+                    }
+                    is ForecastResponse -> {
+                        if (resp.forecast!= null) {
+                            if (resp.current != null && resp.location != null) {
+                                setCurrentWeather(resp.current, resp.location)
+                            }
+                        } else {
+                            binding.rootScrollView.isVisible = false
+                        }
                     }
                 }
+            } else if (responseState is ResponseState.Loading) {
+                binding.loading = true
             }
         }
         )
     }
+
 
     private fun setCurrentWeather(current: Current?, location: Location?) {
         hideKeyboard(binding.root)
