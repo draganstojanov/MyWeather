@@ -13,44 +13,29 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class ApiRepository  @Inject constructor(private val apiService: ApiService,private val gson:Gson) {
+class ApiRepository @Inject constructor(private val apiService: ApiService, private val gson: Gson) {
 
     private val type = object : TypeToken<ResponseError>() {}.type
 
     suspend fun getAstronomy(query: String): ResponseState {
-
-        val response: Response<AstronomyResponse>?
-
-        if (App.networkStatus) {
-
-            response = apiService.getAstronomy(
+        val response: Response<AstronomyResponse>
+        return if (App.networkStatus) {
+            apiService.getAstronomy(
                 mapOf(
                     "key" to EndPoints.KEY,
                     "q" to query,
                     "date" to DateFormatter.dateQueryToday(),
                 )
-            )
-
-            return try {
-                if (response.isSuccessful) {
-                    ResponseState.AstronomyData(response.body())
-                } else {
-                    val errorResponse: ResponseError? = gson.fromJson(response.errorBody()!!.charStream(), type)
-                    ResponseState.Error(errorResponse?.error?.message.toString())
-                }
-            } catch (exc: Exception) {
-                (ResponseState.Error(exc.localizedMessage!!))
-            }
+            ).also { response = it }
+            getReturnData(response)
         } else {
-            return ResponseState.Error("No network")
+            ResponseState.Error("No network")
         }
     }
 
     suspend fun getForecast(query: String): ResponseState {
-
-        val response: Response<ForecastResponse>?
-
-        if (App.networkStatus) {
+        val response: Response<ForecastResponse>
+        return if (App.networkStatus) {
             response = apiService.getForecast(
                 mapOf(
                     "key" to EndPoints.KEY,
@@ -60,19 +45,22 @@ class ApiRepository  @Inject constructor(private val apiService: ApiService,priv
                     "alerts" to "no"
                 )
             )
-            return try {
-                if (response.isSuccessful) {
-                    ResponseState.ForecastData(response.body())
-                } else {
-                    val errorResponse: ResponseError? = gson.fromJson(response.errorBody()!!.charStream(), type)
-                    ResponseState.Error(errorResponse?.error?.message.toString())
-                }
-            } catch (exc: Exception) {
-                (ResponseState.Error(exc.localizedMessage!!))
-            }
-            
+            getReturnData(response)
         } else {
-            return ResponseState.Error("No network")
+            ResponseState.Error("No network")
+        }
+    }
+
+    private fun getReturnData(response: Response<*>): ResponseState {
+        return try {
+            if (response.isSuccessful) {
+                ResponseState.ResponseData(response.body())
+            } else {
+                val errorResponse: ResponseError? = gson.fromJson(response.errorBody()!!.charStream(), type)
+                ResponseState.Error(errorResponse?.error?.message.toString())
+            }
+        } catch (exc: Exception) {
+            (ResponseState.Error(exc.localizedMessage!!))
         }
     }
 }
