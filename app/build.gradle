@@ -107,6 +107,10 @@ android {
         //Eazy Runtime Permission
         implementation 'com.sagar:dslpermission:2.0.3'
 
+        //Data Store
+        implementation("androidx.datastore:datastore-preferences:1.0.0-beta01")
+
+
 
         //Test
 //    testImplementation 'junit:junit:4.+'

@@ -3,12 +3,14 @@ package com.andraganoid.myweather.ui
 import androidx.lifecycle.*
 import com.andraganoid.myweather.api.ApiRepository
 import com.andraganoid.myweather.database.DatabaseRepository
+import com.andraganoid.myweather.model.ResponseState
 import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.model.response.ForecastResponse
+import com.andraganoid.myweather.util.Datastore
 import com.andraganoid.myweather.util.Prefs
-import com.andraganoid.myweather.util.ResponseState
 import com.andraganoid.myweather.util.toQueryModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +18,8 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val apiRepository: ApiRepository,
     private val dbRepository: DatabaseRepository,
-    private val prefs: Prefs
+    private val prefs: Prefs,
+    private val datastore: Datastore
 ) : ViewModel() {
 
     private val _weatherData = MutableLiveData<ResponseState>()
@@ -38,7 +41,8 @@ class WeatherViewModel @Inject constructor(
             val response = apiRepository.getForecast(query) as ResponseState.ResponseData
             dbRepository.saveQuery((response.responseData as ForecastResponse).location?.toQueryModel().also { queryModel -> queryModel?.query = query }!!)
             _weatherData.postValue(response)
-            prefs.saveLastCalledQuery(query)
+            // prefs.saveLastCalledQuery(query)
+            datastore.saveLastQueryCalled(query)
             getAstronomy(query)
         }
     }
@@ -49,11 +53,20 @@ class WeatherViewModel @Inject constructor(
 
     fun repeatLastCall() {
         if (canRepeatLastCall) {
-            prefs.getLastCalledQuery().toString().also {
-                if (it.isNotEmpty()) {
-                    getForecast(it)
-                } else {
-                    _getLocation.value = true
+//            prefs.getLastCalledQuery().toString().also {
+//                if (it.isNotEmpty()) {
+//                    getForecast(it)
+//                } else {
+//                    _getLocation.value = true
+//                }
+//            }
+            viewModelScope.launch {
+                datastore.lastQueryCalled.collect { it ->
+                    if (it.isNotEmpty()) {
+                        getForecast(it)
+                    } else {
+                        _getLocation.value = true
+                    }
                 }
             }
         }

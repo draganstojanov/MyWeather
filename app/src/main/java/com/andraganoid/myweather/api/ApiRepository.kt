@@ -6,7 +6,7 @@ import com.andraganoid.myweather.model.response.AstronomyResponse
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.EndPoints
-import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.model.ResponseState
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Response

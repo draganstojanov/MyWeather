@@ -12,7 +12,7 @@ import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.ForecastFragmentBinding
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
-import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.model.ResponseState
 import dagger.hilt.android.AndroidEntryPoint
 
 

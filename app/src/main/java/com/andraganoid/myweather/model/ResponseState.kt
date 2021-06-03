@@ -1,4 +1,4 @@
-package com.andraganoid.myweather.util
+package com.andraganoid.myweather.model
 
 
 sealed class ResponseState {

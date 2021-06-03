@@ -13,7 +13,7 @@ import com.andraganoid.myweather.databinding.CurrentFragmentBinding
 import com.andraganoid.myweather.model.response.*
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
-import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.model.ResponseState
 import com.andraganoid.myweather.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -26,7 +26,7 @@ class CurrentFragment : Fragment() {
 
     private lateinit var binding: CurrentFragmentBinding
     private lateinit var itemList: ArrayList<ItemModel>
-    lateinit var detailsAdapter: ItemAdapter
+    private lateinit var detailsAdapter: ItemAdapter
     lateinit var astroAdapter: ItemAdapter
     lateinit var airAdapter: ItemAdapter
 
@@ -59,8 +59,7 @@ class CurrentFragment : Fragment() {
         }
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
             if (responseState is ResponseState.ResponseData) {
-                val resp = responseState.responseData
-                when (resp) {
+                when (val resp = responseState.responseData) {
                     is CurrentResponse -> {
                         if (resp.current != null) {
                             if (resp.location != null) {
