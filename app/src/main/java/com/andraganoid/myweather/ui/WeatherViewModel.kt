@@ -5,7 +5,7 @@ import com.andraganoid.myweather.api.ApiRepository
 import com.andraganoid.myweather.database.DatabaseRepository
 import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.util.Prefs
-import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.util.toQueryModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -60,7 +60,7 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    fun getSavedQuerys() = dbRepository.getAllQuerys().asLiveData()
+    fun getSavedQuerys() = dbRepository.getAllQueries().asLiveData()
 
     fun deleteSavedQuery(query: QueryModel) {
         viewModelScope.launch {

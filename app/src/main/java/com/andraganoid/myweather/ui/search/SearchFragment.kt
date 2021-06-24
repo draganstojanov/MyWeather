@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels()
     private lateinit var binding: SearchFragmentBinding
-    lateinit var savedAdapter: SavedAdapter
+    private lateinit var savedAdapter: SavedAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 

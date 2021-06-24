@@ -17,9 +17,7 @@ fun decimalFormatter(number: Number): String {
     return (if (shortDouble == longValue.toDouble()) longValue else shortDouble).toString()
 }
 
-fun temperatureFormatter(temp: Number): String {
-    return "${decimalFormatter(temp)}\u00B0"
-}
+fun temperatureFormatter(temp: Number): String = "${decimalFormatter(temp)}\u00B0"
 
 fun Location.toQueryModel() = QueryModel(
     name = name,

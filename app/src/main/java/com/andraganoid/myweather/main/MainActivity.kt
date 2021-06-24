@@ -8,7 +8,7 @@ import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.ActivityMainBinding
 import com.andraganoid.myweather.ui.WeatherFragment
 import com.andraganoid.myweather.ui.WeatherViewModel
-import com.andraganoid.myweather.util.ResponseState
+import com.andraganoid.myweather.api.ResponseState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -27,7 +27,7 @@ class SavedAdapter(private val viewModel: WeatherViewModel) : RecyclerView.Adapt
 
         fun bind(query: QueryModel) {
             binding.query = query
-            binding.root.setOnClickListener { viewModel.getForecast(query.query.toString()) }
+            binding.root.setOnClickListener { viewModel.getForecast(query.query) }
             binding.deleteBtn.setOnClickListener { viewModel.deleteSavedQuery(query) }
         }
     }

@@ -29,9 +29,9 @@ class WeatherFragment : Fragment() {
 
     private fun setup() {
         tabTitle = arrayListOf(
-            getString(R.string.now).toUpperCase(Locale.getDefault()),
-            getString(R.string.forecast).toUpperCase(Locale.getDefault()),
-            getString(R.string.search).toUpperCase(Locale.getDefault())
+            getString(R.string.now).uppercase(Locale.getDefault()),
+            getString(R.string.forecast).uppercase(Locale.getDefault()),
+            getString(R.string.search).uppercase(Locale.getDefault())
         )
         binding.viewPager.apply {
             adapter = WeatherAdapter(this@WeatherFragment)
