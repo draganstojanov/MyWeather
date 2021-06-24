@@ -1,5 +1,9 @@
 package com.andraganoid.myweather.util
 
+import android.app.Activity
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.model.response.Location
 import java.math.RoundingMode

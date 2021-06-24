@@ -1,4 +1,6 @@
-package com.andraganoid.myweather.util
+package com.andraganoid.myweather.api
+
+import com.andraganoid.myweather.util.Key
 
 class EndPoints {
     companion object {

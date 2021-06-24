@@ -3,7 +3,7 @@ package com.andraganoid.myweather.di
 
 import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
-import com.andraganoid.myweather.util.EndPoints
+import com.andraganoid.myweather.api.EndPoints
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

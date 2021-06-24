@@ -2,7 +2,7 @@ package com.andraganoid.myweather.model.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.andraganoid.myweather.util.DB
+import com.andraganoid.myweather.database.DB
 
 @Entity(tableName = DB.QUERY_TABLE)
 data class QueryModel(

@@ -11,12 +11,12 @@ import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.CurrentFragmentBinding
 import com.andraganoid.myweather.model.response.Astronomy
-import com.andraganoid.myweather.model.response.Current
+import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
+import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import javax.inject.Inject
 
 
@@ -29,7 +29,6 @@ class CurrentFragment : Fragment() {
     lateinit var itemBuilder: ItemBuilder
 
     private lateinit var binding: CurrentFragmentBinding
-    private lateinit var itemList: ArrayList<ItemModel>
     private lateinit var detailsAdapter: ItemAdapter
     private lateinit var astroAdapter: ItemAdapter
     private lateinit var airAdapter: ItemAdapter
@@ -61,24 +60,27 @@ class CurrentFragment : Fragment() {
         binding.refreshBtn.setOnClickListener {
             viewModel.repeatLastCall()
         }
-
-        viewModel.astronomyData.observe(viewLifecycleOwner, { setAstronomy(it) })
-        viewModel.currentData.observe(viewLifecycleOwner, { setCurrentWeather(it) })
-        viewModel.locationData.observe(viewLifecycleOwner, { binding.location = it })
-
+        viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
+            when (responseState) {
+                is ResponseState.Loading -> binding.loading = true
+                is ResponseState.AstronomyData -> setAstronomy(responseState.astronomyResponse?.astronomy)
+                is ResponseState.ForecastData -> setCurrentWeather(responseState.forecastResponse)
+            }
+        })
     }
 
-    private fun setCurrentWeather(current: Current?) {
+    private fun setCurrentWeather(forecastResponse: ForecastResponse?) {
         hideKeyboard(binding.root)
         viewModel._showFragment.value = 0
         binding.loading = false
 
-        binding.current = current
+        binding.current = forecastResponse?.current
+        binding.location = forecastResponse?.location
         binding.weekDayToday.text = DateFormatter.todayWeekDay()
         binding.dateToday.text = DateFormatter.dateToday()
 
-        detailsAdapter.itemList = itemBuilder.detailsList(current)
-        airAdapter.itemList = itemBuilder.airList(current)
+        detailsAdapter.itemList = itemBuilder.detailsList(forecastResponse?.current)
+        airAdapter.itemList = itemBuilder.airList(forecastResponse?.current)
         binding.rootScrollView.isVisible = true
     }
 
