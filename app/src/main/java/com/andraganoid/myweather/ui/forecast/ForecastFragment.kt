@@ -9,8 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
+import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.databinding.ForecastFragmentBinding
-import com.andraganoid.myweather.model.response.Forecast
+import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,13 +29,16 @@ class ForecastFragment : Fragment() {
     }
 
     private fun setup() {
-        viewModel.forecastData.observe(viewLifecycleOwner, { setForecastWeather(it) })
+        viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
+            if (responseState is ResponseState.ForecastData) {
+                setForecastWeather(responseState.forecastResponse)
+            }
+        })
     }
 
-    private fun setForecastWeather(forecast: Forecast?) {
-        val dayAdapter = DayAdapter(forecast?.forecastday)
+    private fun setForecastWeather(forecast: ForecastResponse?) {
         binding.daysRecView.apply {
-            adapter = dayAdapter
+            adapter = DayAdapter(forecast?.forecast?.forecastday)
             isVisible = true
         }
     }

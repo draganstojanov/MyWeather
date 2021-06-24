@@ -2,6 +2,7 @@ package com.andraganoid.myweather.di
 
 import android.content.Context
 import androidx.room.Room
+import com.andraganoid.myweather.database.DB
 import com.andraganoid.myweather.database.WeatherDatabase
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ object DatabaseModule {
         Room.databaseBuilder(
             app,
             WeatherDatabase::class.java,
-            "weather_database"
+            DB.NAME
         ).fallbackToDestructiveMigration().build()
 
     @Singleton

@@ -23,7 +23,7 @@ class ItemBuilder(private val context: Context) {
         }
     }
 
-    fun airList(current: Current?): java.util.ArrayList<ItemModel> {
+    fun airList(current: Current?): ArrayList<ItemModel> {
         val airItem = arrayListOf<ItemModel>()
         return airItem.apply {
             add(ItemModel(label = context.getString(R.string.carbon_monoxide), value = current?.airQuality?.co, unit = context.getString(R.string.mgm3)))
@@ -35,7 +35,7 @@ class ItemBuilder(private val context: Context) {
         }
     }
 
-    fun astroList(astronomy: Astronomy?): java.util.ArrayList<ItemModel> {
+    fun astroList(astronomy: Astronomy?): ArrayList<ItemModel> {
         val astroItem = arrayListOf<ItemModel>()
         return astroItem.apply {
             add(ItemModel(label = context.getString(R.string.sunrise), value = DateFormatter.to24hFormat(astronomy?.astro?.sunrise!!)))
