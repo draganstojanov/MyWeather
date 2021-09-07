@@ -2,24 +2,25 @@ package com.andraganoid.myweather.ui.search
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
+import com.andraganoid.myweather.util.actionSnackbar
 import com.andraganoid.myweather.util.logA
-import com.eazypermissions.common.model.PermissionResult
-import com.eazypermissions.dsl.extension.requestPermissions
+import com.andraganoid.myweather.util.longSnackbar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +30,6 @@ class SearchFragment : Fragment() {
     private lateinit var binding: SearchFragmentBinding
     private lateinit var savedAdapter: SavedAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.search_fragment, container, false)
@@ -42,7 +42,6 @@ class SearchFragment : Fragment() {
         binding.getLocationBtn.setOnClickListener { getLocation() }
         savedAdapter = SavedAdapter(viewModel)
         binding.savedRecView.adapter = savedAdapter
-
         binding.locationNameBtn.setOnClickListener {
             getWeather()
         }
@@ -66,38 +65,40 @@ class SearchFragment : Fragment() {
 
     private fun getLocation() {
         viewModel.canRepeatLastCall = false
-        requestPermissions(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) {
-            requestCode = 4
-            resultCallback = {
-                when (this) {
-                    is PermissionResult.PermissionGranted -> {
-                        getLocationData()
-                    }
-                    is PermissionResult.PermissionDenied -> {
-                        Snackbar.make(binding.root, "Location permission denied. Try again.", Snackbar.LENGTH_LONG).show()
-                    }
-                    is PermissionResult.PermissionDeniedPermanently -> {
-                        Snackbar.make(binding.root, "Location permission denied. Try manually at device settings.", Snackbar.LENGTH_LONG).show()
-                    }
-                    is PermissionResult.ShowRational -> {
-                        AlertDialog.Builder(requireActivity())
-                            .setTitle("Location permission")
-                            .setMessage("This app requires access to get Device location.")
-                            .setPositiveButton("Ask me") { _, _ -> getLocation() }
-                            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                            .show()
-                    }
-                }
-            }
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getLocationData()
+        } else requestPermission()
+    }
+
+
+    private fun requestPermission() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            binding.root.actionSnackbar("Location access required") { launch() }
+        } else {
+            binding.root.actionSnackbar("Location access not available") { launch() }
         }
     }
 
+    private fun launch() {
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getLocationData()
+                binding.root.actionSnackbar("Permission granted") { getLocationData() }
+            } else {
+                binding.root.longSnackbar("Permission denied")
+            }
+        }
+
+
     @SuppressLint("MissingPermission")
     private fun getLocationData() {
-
         fusedLocationClient.locationAvailability.addOnSuccessListener { logA(it) }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
@@ -105,9 +106,9 @@ class SearchFragment : Fragment() {
                     viewModel.getForecast("${location.latitude},${location.longitude}")
                 }
             }.addOnFailureListener { exc ->
-                Snackbar.make(binding.root, exc.localizedMessage!!, Snackbar.LENGTH_LONG).show()
+                binding.root.actionSnackbar(exc.message) {}
             }.addOnCanceledListener {
-                Snackbar.make(binding.root, "Cancelled", Snackbar.LENGTH_LONG).show()
+                binding.root.longSnackbar("Cancelled")
             }
     }
 }

@@ -9,12 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
+import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.databinding.CurrentFragmentBinding
 import com.andraganoid.myweather.model.response.Astronomy
+import com.andraganoid.myweather.model.response.AstronomyResponse
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.DateFormatter
-import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -63,8 +64,12 @@ class CurrentFragment : Fragment() {
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> binding.loading = true
-                is ResponseState.AstronomyData -> setAstronomy(responseState.astronomyResponse?.astronomy)
-                is ResponseState.ForecastData -> setCurrentWeather(responseState.forecastResponse)
+                is ResponseState.Success -> {
+                    when (responseState.data) {
+                        is AstronomyResponse -> setAstronomy((responseState.data).astronomy)
+                        is ForecastResponse -> setCurrentWeather(responseState.data)
+                    }
+                }
             }
         })
     }

@@ -24,7 +24,7 @@ class HourAdapter(private val isToday: Boolean) : RecyclerView.Adapter<HourAdapt
 
     override fun onBindViewHolder(holder: HourHolder, position: Int) = holder.bind(hourList?.get(position))
 
-    override fun getItemCount(): Int = hourList?.size!!
+    override fun getItemCount(): Int = hourList?.size?:0
 
     inner class HourHolder(private val binding: HourItemBinding) : RecyclerView.ViewHolder(binding.root) {
 

@@ -5,11 +5,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.andraganoid.myweather.R
+import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.databinding.ActivityMainBinding
 import com.andraganoid.myweather.ui.WeatherFragment
 import com.andraganoid.myweather.ui.WeatherViewModel
-import com.andraganoid.myweather.api.ResponseState
-import com.google.android.material.snackbar.Snackbar
+import com.andraganoid.myweather.util.actionSnackbar
+import com.andraganoid.myweather.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,10 +38,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.weatherData.observe(this, { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> {
-                    Snackbar.make(binding.root, responseState.loaderMsg, Snackbar.LENGTH_LONG).show()
+                    binding.root.showSnackbar("LOADING")
                 }
                 is ResponseState.Error -> {
-                    Snackbar.make(binding.root, responseState.errorMsg, Snackbar.LENGTH_LONG).show()
+                    binding.root.actionSnackbar(responseState.message) {}
                 }
             }
         }
