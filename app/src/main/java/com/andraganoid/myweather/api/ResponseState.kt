@@ -1,11 +1,10 @@
 package com.andraganoid.myweather.api
 
-import com.andraganoid.myweather.model.response.AstronomyResponse
-import com.andraganoid.myweather.model.response.ForecastResponse
-
-sealed class ResponseState {
-    data class Loading(val loaderMsg: String) : ResponseState()
-    data class Error(val errorMsg: String) : ResponseState()
-    data class AstronomyData(val astronomyResponse: AstronomyResponse?) : ResponseState()
-    data class ForecastData(val forecastResponse: ForecastResponse?) : ResponseState()
+sealed class ResponseState<T>(
+    val data: Any? = null,
+    val message: String? = null
+) {
+    class Success<T>(data: Any) : ResponseState<T>(data)
+    class Error<T>(message: String, data: T? = null) : ResponseState<T>(data, message)
+    class Loading<T> : ResponseState<T>()
 }

@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
-import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.databinding.ForecastFragmentBinding
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
@@ -30,8 +29,8 @@ class ForecastFragment : Fragment() {
 
     private fun setup() {
         viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
-            if (responseState is ResponseState.ForecastData) {
-                setForecastWeather(responseState.forecastResponse)
+            if (responseState.data is ForecastResponse) {
+                setForecastWeather(responseState.data)
             }
         })
     }
