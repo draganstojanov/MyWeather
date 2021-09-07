@@ -16,10 +16,11 @@ import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
+import com.andraganoid.myweather.util.actionSnackbar
 import com.andraganoid.myweather.util.logA
+import com.andraganoid.myweather.util.longSnackbar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +42,6 @@ class SearchFragment : Fragment() {
         binding.getLocationBtn.setOnClickListener { getLocation() }
         savedAdapter = SavedAdapter(viewModel)
         binding.savedRecView.adapter = savedAdapter
-
         binding.locationNameBtn.setOnClickListener {
             getWeather()
         }
@@ -66,9 +66,7 @@ class SearchFragment : Fragment() {
     private fun getLocation() {
         viewModel.canRepeatLastCall = false
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocationData()
         } else requestPermission()
     }
@@ -76,13 +74,14 @@ class SearchFragment : Fragment() {
 
     private fun requestPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            Snackbar.make(binding.root, "Location access required", Snackbar.LENGTH_LONG).show()
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            binding.root.actionSnackbar("Location access required") { launch() }
         } else {
-
-            Snackbar.make(binding.root, "Location access not available", Snackbar.LENGTH_LONG).show()
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            binding.root.actionSnackbar("Location access not available") { launch() }
         }
+    }
+
+    private fun launch() {
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
     private val requestPermissionLauncher =
@@ -91,9 +90,9 @@ class SearchFragment : Fragment() {
         ) { isGranted: Boolean ->
             if (isGranted) {
                 getLocationData()
-                Snackbar.make(binding.root, "Permission granted", Snackbar.LENGTH_LONG).show()
+                binding.root.actionSnackbar("Permission granted") { getLocationData() }
             } else {
-                Snackbar.make(binding.root, "Permission denied", Snackbar.LENGTH_LONG).show()
+                binding.root.longSnackbar("Permission denied")
             }
         }
 
@@ -107,9 +106,9 @@ class SearchFragment : Fragment() {
                     viewModel.getForecast("${location.latitude},${location.longitude}")
                 }
             }.addOnFailureListener { exc ->
-                Snackbar.make(binding.root, exc.localizedMessage!!, Snackbar.LENGTH_LONG).show()
+                binding.root.actionSnackbar(exc.message) {}
             }.addOnCanceledListener {
-                Snackbar.make(binding.root, "Cancelled", Snackbar.LENGTH_LONG).show()
+                binding.root.longSnackbar("Cancelled")
             }
     }
 }
