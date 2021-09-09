@@ -10,13 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
+import com.andraganoid.myweather.util.hideKeyboard
 import com.andraganoid.myweather.util.logA
 import com.andraganoid.myweather.util.longSnackbar
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -27,12 +26,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels()
-    private lateinit var binding: SearchFragmentBinding
+    private var _binding: SearchFragmentBinding? = null
+    private val binding get() = _binding!!
     private lateinit var savedAdapter: SavedAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.search_fragment, container, false)
+        _binding = SearchFragmentBinding.inflate(inflater, container, false)
         setup()
         return binding.root
     }
@@ -44,6 +44,7 @@ class SearchFragment : Fragment() {
         binding.savedRecView.adapter = savedAdapter
         binding.locationNameBtn.setOnClickListener {
             getWeather()
+            hideKeyboard(binding.root)
         }
 
         viewModel.getSavedQuerys().observe(viewLifecycleOwner, { savedList ->
@@ -62,25 +63,22 @@ class SearchFragment : Fragment() {
         }
     }
 
-
     private fun getLocation() {
         viewModel.canRepeatLastCall = false
-
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocationData()
         } else requestPermission()
     }
 
-
     private fun requestPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            binding.root.actionSnackbar("Location access required") { launch() }
+            binding.root.actionSnackbar("Location access required") { requestPermissionLaunch() }
         } else {
-            binding.root.actionSnackbar("Location access not available") { launch() }
+            binding.root.actionSnackbar("Location access not available") { requestPermissionLaunch() }
         }
     }
 
-    private fun launch() {
+    private fun requestPermissionLaunch() {
         requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
@@ -111,4 +109,10 @@ class SearchFragment : Fragment() {
                 binding.root.longSnackbar("Cancelled")
             }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

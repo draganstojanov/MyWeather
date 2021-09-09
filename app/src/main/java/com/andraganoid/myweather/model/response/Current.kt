@@ -2,61 +2,62 @@ package com.andraganoid.myweather.model.response
 
 import com.andraganoid.myweather.util.DateFormatter
 import com.andraganoid.myweather.util.temperatureFormatter
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class Current(
 
-    @field:SerializedName("feelslike_c")
+    @Json(name = "feelslike_c")
     val feelsLikeC: Double? = null,
 
-    @field:SerializedName("uv")
+    @Json(name = "uv")
     val uv: Double? = null,
 
-    @field:SerializedName("last_updated")
+    @Json(name = "last_updated")
     val lastUpdated: String? = null,
 
-    @field:SerializedName("wind_degree")
+    @Json(name = "wind_degree")
     val windDegree: Int? = null,
 
-    @field:SerializedName("last_updated_epoch")
+    @Json(name = "last_updated_epoch")
     val lastUpdatedEpoch: Int? = null,
 
-    @field:SerializedName("is_day")
+    @Json(name = "is_day")
     val isDay: Int? = null,
 
-    @field:SerializedName("air_quality")
+    @Json(name = "air_quality")
     val airQuality: AirQuality? = null,
 
-    @field:SerializedName("wind_dir")
+    @Json(name = "wind_dir")
     val windDir: String? = null,
 
-    @field:SerializedName("temp_c")
+    @Json(name = "temp_c")
     val tempC: Double? = null,
 
-    @field:SerializedName("gust_kph")
+    @Json(name = "gust_kph")
     val gustKph: Double? = null,
 
-    @field:SerializedName("precip_mm")
+    @Json(name = "precip_mm")
     val precipMm: Double? = null,
 
-    @field:SerializedName("cloud")
+    @Json(name = "cloud")
     val cloud: Int? = null,
 
-    @field:SerializedName("wind_kph")
+    @Json(name = "wind_kph")
     val windKph: Double? = null,
 
-    @field:SerializedName("condition")
+    @Json(name = "condition")
     val condition: Condition? = null,
 
-    @field:SerializedName("vis_km")
+    @Json(name = "vis_km")
     val visKm: Double? = null,
 
-    @field:SerializedName("humidity")
+    @Json(name = "humidity")
     val humidity: Int? = null,
 
-    @field:SerializedName("pressure_mb")
+    @Json(name = "pressure_mb")
     val pressureMb: Double? = null
-) {
+) : Serializable {
     val formattedTemp: String
         get() = temperatureFormatter(tempC!!)
 

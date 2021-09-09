@@ -1,15 +1,16 @@
 package com.andraganoid.myweather.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class Condition(
 
-	@field:SerializedName("code")
-	val code: Int? = null,
+    @Json(name = "code")
+    val code: Int? = null,
 
-	@field:SerializedName("icon")
-	val icon: String? = null,
+    @Json(name = "icon")
+    val icon: String? = null,
 
-	@field:SerializedName("text")
-	val text: String? = null
-)
+    @Json(name = "text")
+    val text: String? = null
+) : Serializable

@@ -1,15 +1,16 @@
 package com.andraganoid.myweather.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class ForecastResponse(
 
-    @field:SerializedName("current")
+    @Json(name = "current")
     val current: Current? = null,
 
-    @field:SerializedName("location")
+    @Json(name = "location")
     val location: Location? = null,
 
-    @field:SerializedName("forecast")
+    @Json(name = "forecast")
     val forecast: Forecast? = null
-)
+) : Serializable

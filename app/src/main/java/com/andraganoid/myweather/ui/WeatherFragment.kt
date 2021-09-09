@@ -18,14 +18,18 @@ import java.util.*
 class WeatherFragment : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels()
-    private lateinit var binding: WeatherFragmentBinding
     private lateinit var tabTitle: List<String>
 
+    private var _binding: WeatherFragmentBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.weather_fragment, container, false)
+
+        _binding = WeatherFragmentBinding.inflate(inflater, container, false)
         setup()
         return binding.root
     }
+
 
     private fun setup() {
         tabTitle = arrayListOf(
@@ -44,6 +48,11 @@ class WeatherFragment : Fragment() {
         viewModel.showFragment.observe(viewLifecycleOwner, {
             binding.viewPager.currentItem = it
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

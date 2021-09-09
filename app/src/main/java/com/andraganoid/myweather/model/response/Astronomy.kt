@@ -1,9 +1,10 @@
 package com.andraganoid.myweather.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class Astronomy(
 
-	@field:SerializedName("astro")
-	val astro: Astro? = null
-)
+    @Json(name = "astro")
+    val astro: Astro? = null
+) : Serializable

@@ -2,49 +2,50 @@ package com.andraganoid.myweather.model.response
 
 import com.andraganoid.myweather.util.decimalFormatter
 import com.andraganoid.myweather.util.temperatureFormatter
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class Day(
 
-    @field:SerializedName("avgvis_km")
+    @Json(name = "avgvis_km")
     val avgvisKm: Double? = null,
 
-    @field:SerializedName("uv")
+    @Json(name = "uv")
     val uv: Double? = null,
 
-    @field:SerializedName("avgtemp_c")
+    @Json(name = "avgtemp_c")
     val avgtempC: Double? = null,
 
-    @field:SerializedName("daily_chance_of_snow")
+    @Json(name = "daily_chance_of_snow")
     val dailyChanceOfSnow: String? = null,
 
-    @field:SerializedName("maxtemp_c")
+    @Json(name = "maxtemp_c")
     val maxtempC: Double? = null,
 
-    @field:SerializedName("mintemp_c")
+    @Json(name = "mintemp_c")
     val mintempC: Double? = null,
 
-    @field:SerializedName("daily_will_it_rain")
+    @Json(name = "daily_will_it_rain")
     val dailyWillItRain: Int? = null,
 
-    @field:SerializedName("avghumidity")
+    @Json(name = "avghumidity")
     val avghumidity: Double? = null,
 
-    @field:SerializedName("condition")
+    @Json(name = "condition")
     val condition: Condition? = null,
 
-    @field:SerializedName("maxwind_kph")
+    @Json(name = "maxwind_kph")
     val maxwindKph: Double? = null,
 
-    @field:SerializedName("daily_chance_of_rain")
+    @Json(name = "daily_chance_of_rain")
     val dailyChanceOfRain: String? = null,
 
-    @field:SerializedName("totalprecip_mm")
+    @Json(name = "totalprecip_mm")
     val totalprecipMm: Double? = null,
 
-    @field:SerializedName("daily_will_it_snow")
+    @Json(name = "daily_will_it_snow")
     val dailyWillItSnow: Int? = null
-) {
+) : Serializable {
     val formattedTemp: String
         get() = "${temperatureFormatter(mintempC!!)}-${temperatureFormatter(maxtempC!!)}"
 
