@@ -1,9 +1,10 @@
 package com.andraganoid.myweather.model.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class Forecast(
 
-	@field:SerializedName("forecastday")
-	val forecastday: List<ForecastDay?>? = null
-)
+    @Json(name = "forecastday")
+    val forecastday: List<ForecastDay?>? = null
+) : Serializable

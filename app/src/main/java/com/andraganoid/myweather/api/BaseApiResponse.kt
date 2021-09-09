@@ -3,13 +3,10 @@ package com.andraganoid.myweather.api
 
 import com.andraganoid.myweather.main.App
 import com.andraganoid.myweather.model.ResponseError
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.andraganoid.myweather.util.parseErrJsonResponse
 import retrofit2.Response
 
 abstract class BaseApiResponse {
-
-    private val type = object : TypeToken<ResponseError>() {}.type
 
     suspend fun <T> apiCall(apiCall: suspend () -> Response<T>): ResponseState<T> {
         if (App.networkStatus) {
@@ -23,8 +20,8 @@ abstract class BaseApiResponse {
                         ResponseState.Error("Something went wrong")
                     }
                 } else {
-                    val errorResponse: ResponseError? = Gson().fromJson(response.errorBody()!!.charStream(), type)
-                    ResponseState.Error(errorResponse?.error?.message.toString())
+                    val errorResponse: ResponseError? = response.parseErrJsonResponse<ResponseError>()
+                    return if (errorResponse != null) ResponseState.Error(errorResponse.error?.message.toString()) else ResponseState.Error("Something went wrong")
                 }
             } catch (exc: Exception) {
                 ResponseState.Error(exc.localizedMessage!!)

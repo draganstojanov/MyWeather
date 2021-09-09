@@ -3,14 +3,13 @@ package com.andraganoid.myweather.api
 import com.andraganoid.myweather.model.response.AstronomyResponse
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.util.DateFormatter
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class ApiRepository @Inject constructor(private val apiService: ApiService, private val gson: Gson) : BaseApiResponse() {
+class ApiRepository @Inject constructor(private val apiService: ApiService) : BaseApiResponse() {
 
 
     suspend fun getForecast(query: String): Flow<ResponseState<ForecastResponse>> = flow<ResponseState<ForecastResponse>> {
