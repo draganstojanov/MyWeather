@@ -17,6 +17,7 @@ import com.andraganoid.myweather.R
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
+import com.andraganoid.myweather.util.hideKeyboard
 import com.andraganoid.myweather.util.logA
 import com.andraganoid.myweather.util.longSnackbar
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -44,6 +45,7 @@ class SearchFragment : Fragment() {
         binding.savedRecView.adapter = savedAdapter
         binding.locationNameBtn.setOnClickListener {
             getWeather()
+            hideKeyboard(binding.root)
         }
 
         viewModel.getSavedQuerys().observe(viewLifecycleOwner, { savedList ->
@@ -65,7 +67,6 @@ class SearchFragment : Fragment() {
 
     private fun getLocation() {
         viewModel.canRepeatLastCall = false
-
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getLocationData()
         } else requestPermission()
@@ -74,13 +75,13 @@ class SearchFragment : Fragment() {
 
     private fun requestPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            binding.root.actionSnackbar("Location access required") { launch() }
+            binding.root.actionSnackbar("Location access required") { requestPermissionLaunch() }
         } else {
-            binding.root.actionSnackbar("Location access not available") { launch() }
+            binding.root.actionSnackbar("Location access not available") { requestPermissionLaunch() }
         }
     }
 
-    private fun launch() {
+    private fun requestPermissionLaunch() {
         requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
     }
 
