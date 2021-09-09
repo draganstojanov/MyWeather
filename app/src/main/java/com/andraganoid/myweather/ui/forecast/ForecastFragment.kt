@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
+import com.andraganoid.myweather.databinding.CurrentFragmentBinding
 import com.andraganoid.myweather.databinding.ForecastFragmentBinding
 import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.ui.WeatherViewModel
@@ -19,10 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class ForecastFragment : Fragment() {
 
     private val viewModel: WeatherViewModel by activityViewModels()
-    private lateinit var binding: ForecastFragmentBinding
+
+    private var _binding: ForecastFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.forecast_fragment, container, false)
+        _binding = ForecastFragmentBinding.inflate(inflater, container, false)
         setup()
         return binding.root
     }
@@ -40,6 +43,11 @@ class ForecastFragment : Fragment() {
             adapter = DayAdapter(forecast?.forecast?.forecastday)
             isVisible = true
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

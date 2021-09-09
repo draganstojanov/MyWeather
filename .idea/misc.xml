@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/current_fragment.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/forecast_fragment.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/search_fragment.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/weather_fragment.xml" value="0.359375" />
       </map>
     </option>
   </component>
