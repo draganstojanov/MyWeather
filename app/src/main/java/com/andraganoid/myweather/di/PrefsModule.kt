@@ -1,7 +1,7 @@
 package com.andraganoid.myweather.di
 
 import android.content.Context
-import com.andraganoid.myweather.util.Prefs
+import com.andraganoid.prefs.Prefs
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
