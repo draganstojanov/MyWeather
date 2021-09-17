@@ -22,9 +22,6 @@ import javax.inject.Singleton
 class ApiModule {
 
     @Provides
-    fun providesBaseUrl() = EndPoints.BASE_URL
-
-    @Provides
     fun providesClient(): OkHttpClient {
         val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -39,9 +36,9 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl: String, client: OkHttpClient): Retrofit =
+    fun provideRetrofit(client: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(EndPoints.BASE_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()

@@ -1,14 +1,15 @@
 package com.andraganoid.myweather.api
 
 
+import com.andraganoid.connectivity.ConnectivityState.Companion.connectivityStatus
 import com.andraganoid.myweather.model.ResponseError
 import com.andraganoid.myweather.util.parseErrJsonResponse
-import com.andraganoid.net.NetCheck.Companion.networkStatus
+
 import retrofit2.Response
 
 abstract class BaseApiResponse {
     suspend fun <T> apiCall(apiCall: suspend () -> Response<T>): ResponseState<T> {
-        if (networkStatus) {
+        if (connectivityStatus) {
             return try {
                 val response = apiCall()
                 if (response.isSuccessful) {

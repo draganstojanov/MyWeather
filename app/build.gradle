@@ -64,7 +64,7 @@ android {
     dependencies {
 
         // lib
-        implementation project(path: ':net')
+        implementation project(path: ':connectivity')
         implementation project(path: ':prefs')
 
         // AndroidX

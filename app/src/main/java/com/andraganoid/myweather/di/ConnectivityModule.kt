@@ -1,7 +1,7 @@
 package com.andraganoid.myweather.di
 
 import android.content.Context
-import com.andraganoid.net.NetCheck
+import com.andraganoid.connectivity.ConnectivityState
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,10 +12,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetModule {
+class ConnectivityModule {
 
     @Provides
     @Singleton
-    fun providesNet(@ApplicationContext context: Context) = NetCheck(context)
+    fun providesConnectivity(@ApplicationContext context: Context) = ConnectivityState(context)
 
 }
