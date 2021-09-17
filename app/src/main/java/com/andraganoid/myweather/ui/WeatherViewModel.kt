@@ -6,8 +6,8 @@ import com.andraganoid.myweather.api.ResponseState
 import com.andraganoid.myweather.database.DatabaseRepository
 import com.andraganoid.myweather.model.db.QueryModel
 import com.andraganoid.myweather.model.response.ForecastResponse
-import com.andraganoid.myweather.util.Prefs
 import com.andraganoid.myweather.util.toQueryModel
+import com.andraganoid.prefs.Prefs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

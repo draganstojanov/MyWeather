@@ -1,11 +1,9 @@
-package com.andraganoid.myweather.util
+package com.andraganoid.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import javax.inject.Inject
 
-
-class Prefs @Inject constructor(val context: Context) {
+class Prefs(val context: Context) {
 
     companion object {
         private const val PREF_NAME = "com.andraganoid.myweather.SHARED_PREFERENCES"
@@ -20,5 +18,4 @@ class Prefs @Inject constructor(val context: Context) {
     }
 
     fun getLastCalledQuery(): String? = sharedPreferences.getString(LAST_CALLED_QUERY, "")
-
 }
