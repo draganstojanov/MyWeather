@@ -1,4 +1,4 @@
-package com.andraganoid.net
+package com.andraganoid.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,24 +7,24 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
 
-class NetCheck(private val context: Context) {
+class ConnectivityState(private val context: Context) {
 
-    fun networkCheck() {
+    fun setListeners() {
         val networkCallback: ConnectivityManager.NetworkCallback = object : ConnectivityManager.NetworkCallback() {
 
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                networkStatus = true
+                connectivityStatus = true
             }
 
             override fun onUnavailable() {
                 super.onUnavailable()
-                networkStatus = false
+                connectivityStatus = false
             }
 
             override fun onLost(network: Network) {
                 super.onLost(network)
-                networkStatus = false
+                connectivityStatus = false
             }
         }
 
@@ -39,7 +39,7 @@ class NetCheck(private val context: Context) {
     }
 
     companion object {
-        var networkStatus = false
+        var connectivityStatus = false
     }
 
 }

@@ -1,4 +1,4 @@
 include ':app'
 rootProject.name = "MyWeather"
-include ':net'
 include ':prefs'
+include ':connectivity'
