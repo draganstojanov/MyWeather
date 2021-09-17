@@ -28,6 +28,7 @@ class App() : Application() {
                 super.onLost(network)
                 networkStatus = false
             }
+
         }
 
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
