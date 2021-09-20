@@ -1,9 +1,8 @@
 package com.andraganoid.myweather.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -14,20 +13,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class WeatherFragment : Fragment() {
+class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val viewModel: WeatherViewModel by activityViewModels()
     private lateinit var tabTitle: List<String>
+    private val binding:WeatherFragmentBinding by viewBinding()
 
-    private var _binding: WeatherFragmentBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = WeatherFragmentBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setup()
-        return binding.root
     }
-
 
     private fun setup() {
         tabTitle = arrayListOf(
@@ -46,11 +41,6 @@ class WeatherFragment : Fragment() {
         viewModel.showFragment.observe(viewLifecycleOwner, {
             binding.viewPager.currentItem = it
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

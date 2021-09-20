@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.viewbinding.library.fragment.viewBinding
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.andraganoid.myweather.R
+import com.andraganoid.myweather.databinding.ForecastFragmentBinding
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
@@ -23,20 +26,17 @@ import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private val viewModel: WeatherViewModel by activityViewModels()
-    private var _binding: SearchFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding: SearchFragmentBinding by viewBinding()
     private lateinit var savedAdapter: SavedAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = SearchFragmentBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setup()
-        return binding.root
     }
-
     private fun setup() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.getLocationBtn.setOnClickListener { getLocation() }
@@ -108,11 +108,6 @@ class SearchFragment : Fragment() {
             }.addOnCanceledListener {
                 binding.root.longSnackbar("Cancelled")
             }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
