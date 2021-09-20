@@ -1,6 +1,7 @@
 package com.andraganoid.myweather.main
 
 import android.os.Bundle
+import android.viewbinding.library.activity.viewBinding
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andraganoid.connectivity.ConnectivityState
@@ -18,14 +19,13 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: WeatherViewModel by viewModels()
-    private lateinit var binding: ActivityMainBinding
+    private val binding:ActivityMainBinding by viewBinding()
 
     @Inject
     lateinit var conn: ConnectivityState
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setup()
         supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer, WeatherFragment(), WeatherFragment::class.simpleName)
