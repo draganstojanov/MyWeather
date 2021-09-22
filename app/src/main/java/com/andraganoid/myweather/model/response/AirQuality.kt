@@ -1,31 +1,33 @@
 package com.andraganoid.myweather.model.response
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class AirQuality(
 
-    @Json(name = "no2")
+    @SerialName("no2")
     val no2: Double? = null,
 
-    @Json(name = "o3")
+    @SerialName("o3")
     val o3: Double? = null,
 
-    @Json(name = "us-epa-index")
+    @SerialName("us-epa-index")
     val usEpaIndex: Int? = null,
 
-    @Json(name = "so2")
+    @SerialName("so2")
     val so2: Double? = null,
 
-    @Json(name = "pm2_5")
+    @SerialName("pm2_5")
     val pm25: Double? = null,
 
-    @Json(name = "pm10")
+    @SerialName("pm10")
     val pm10: Double? = null,
 
-    @Json(name = "co")
+    @SerialName("co")
     val co: Double? = null,
 
-    @Json(name = "gb-defra-index")
+    @SerialName("gb-defra-index")
     val gbDefraIndex: Int? = null
-) : Serializable
+)

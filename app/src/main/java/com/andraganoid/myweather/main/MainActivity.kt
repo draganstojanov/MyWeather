@@ -11,15 +11,20 @@ import com.andraganoid.myweather.databinding.ActivityMainBinding
 import com.andraganoid.myweather.ui.WeatherFragment
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
+import com.andraganoid.myweather.util.logC
 import com.andraganoid.myweather.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: WeatherViewModel by viewModels()
-    private val binding:ActivityMainBinding by viewBinding()
+    private val binding: ActivityMainBinding by viewBinding()
 
     @Inject
     lateinit var conn: ConnectivityState
@@ -39,6 +44,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+
+        val data = listOf(Test("Dragan", 52), Test("Jelena", 42))//TODO Kotlin serializable TEST
+        val encodedData = Json.encodeToString(data)
+        logC(encodedData)
+        val decodedData = Json.decodeFromString<List<Test>>(encodedData)
+        logC(decodedData[0].age)
+        logC(decodedData[1].age)
+
         conn.setListeners()
         viewModel.weatherData.observe(this, { responseState ->
             when (responseState) {
@@ -53,3 +66,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 }
+
+@Serializable
+open class Test(val name: String, val age: Int)//TODO Kotlin serializable TEST

@@ -1,35 +1,37 @@
 package com.andraganoid.myweather.model.response
 
-import com.andraganoid.myweather.util.DateFormatter
-import com.squareup.moshi.Json
-import java.io.Serializable
 
+import com.andraganoid.myweather.util.DateFormatter
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Location(
 
-    @Json(name = "localtime")
+    @SerialName("localtime")
     val localtime: String? = null,
 
-    @Json(name = "country")
+    @SerialName("country")
     val country: String? = null,
 
-    @Json(name = "localtime_epoch")
+    @SerialName("localtime_epoch")
     val localtimeEpoch: Int? = null,
 
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = null,
 
-    @Json(name = "lon")
+    @SerialName("lon")
     val lon: Double? = null,
 
-    @Json(name = "region")
+    @SerialName("region")
     val region: String? = null,
 
-    @Json(name = "lat")
+    @SerialName("lat")
     val lat: Double? = null,
 
-    @Json(name = "tz_id")
+    @SerialName("tz_id")
     val tzId: String? = null
-) : Serializable {
+) {
     val updatedAt: String
         get() = DateFormatter.timeFromDate(localtime)
 }

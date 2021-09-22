@@ -1,80 +1,81 @@
 package com.andraganoid.myweather.model.response
 
 import com.andraganoid.myweather.util.temperatureFormatter
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class HourItem(
 
-    @Json(name = "will_it_rain")
+    @SerialName("will_it_rain")
     val willItRain: Int? = null,
 
-    @Json(name = "feelslike_c")
+    @SerialName("feelslike_c")
     val feelslikeC: Double? = null,
 
-    @Json(name = "uv")
+    @SerialName("uv")
     val uv: Double? = null,
 
-    @Json(name = "wind_degree")
+    @SerialName("wind_degree")
     val windDegree: Int? = null,
 
-    @Json(name = "dewpoint_c")
+    @SerialName("dewpoint_c")
     val dewpointC: Double? = null,
 
-    @Json(name = "windchill_c")
+    @SerialName("windchill_c")
     val windchillC: Double? = null,
 
-    @Json(name = "is_day")
+    @SerialName("is_day")
     val isDay: Int? = null,
 
-    @Json(name = "heatindex_c")
+    @SerialName("heatindex_c")
     val heatindexC: Double? = null,
 
-    @Json(name = "wind_dir")
+    @SerialName("wind_dir")
     val windDir: String? = null,
 
-    @Json(name = "temp_c")
+    @SerialName("temp_c")
     val tempC: Double? = null,
 
-    @Json(name = "chance_of_rain")
-    val chanceOfRain: String? = null,
+    @SerialName("chance_of_rain")
+    val chanceOfRain: Int? = null,
 
-    @Json(name = "gust_kph")
+    @SerialName("gust_kph")
     val gustKph: Double? = null,
 
-    @Json(name = "precip_mm")
+    @SerialName("precip_mm")
     val precipMm: Double? = null,
 
-    @Json(name = "cloud")
+    @SerialName("cloud")
     val cloud: Int? = null,
 
-    @Json(name = "wind_kph")
+    @SerialName("wind_kph")
     val windKph: Double? = null,
 
-    @Json(name = "condition")
+    @SerialName("condition")
     val condition: Condition? = null,
 
-    @Json(name = "will_it_snow")
+    @SerialName("will_it_snow")
     val willItSnow: Int? = null,
 
-    @Json(name = "vis_km")
+    @SerialName("vis_km")
     val visKm: Double? = null,
 
-    @Json(name = "time_epoch")
+    @SerialName("time_epoch")
     val timeEpoch: Int? = null,
 
-    @Json(name = "humidity")
+    @SerialName("humidity")
     val humidity: Int? = null,
 
-    @Json(name = "time")
+    @SerialName("time")
     val time: String? = null,
 
-    @Json(name = "chance_of_snow")
-    val chanceOfSnow: String? = null,
+    @SerialName("chance_of_snow")
+    val chanceOfSnow: Int? = null,
 
-    @Json(name = "pressure_mb")
+    @SerialName("pressure_mb")
     val pressureMb: Double? = null
-) : Serializable {
+) {
     val formattedTemp: String
         get() = temperatureFormatter(tempC!!)
 

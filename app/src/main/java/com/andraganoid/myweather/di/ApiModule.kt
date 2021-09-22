@@ -4,15 +4,16 @@ package com.andraganoid.myweather.di
 import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
 import com.andraganoid.myweather.api.EndPoints
-import com.andraganoid.myweather.util.moshi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -40,7 +41,7 @@ class ApiModule {
         Retrofit.Builder()
             .baseUrl(EndPoints.BASE_URL)
             .client(client)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
 
     @Provides

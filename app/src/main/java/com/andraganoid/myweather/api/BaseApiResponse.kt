@@ -3,8 +3,8 @@ package com.andraganoid.myweather.api
 
 import com.andraganoid.connectivity.ConnectivityState.Companion.connectivityStatus
 import com.andraganoid.myweather.model.ResponseError
-import com.andraganoid.myweather.util.parseErrJsonResponse
-
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import retrofit2.Response
 
 abstract class BaseApiResponse {
@@ -20,8 +20,7 @@ abstract class BaseApiResponse {
                         ResponseState.Error("Something went wrong")
                     }
                 } else {
-                    val errorResponse: ResponseError? =
-                        response.parseErrJsonResponse<ResponseError>()
+                    val errorResponse: ResponseError? = Json.decodeFromString(response.errorBody().toString())
                     return if (errorResponse != null) ResponseState.Error(errorResponse.error?.message.toString()) else ResponseState.Error(
                         "Something went wrong"
                     )

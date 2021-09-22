@@ -1,16 +1,17 @@
 package com.andraganoid.myweather.model.response
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ForecastResponse(
 
-    @Json(name = "current")
+    @SerialName("current")
     val current: Current? = null,
 
-    @Json(name = "location")
+    @SerialName("location")
     val location: Location? = null,
 
-    @Json(name = "forecast")
+    @SerialName("forecast")
     val forecast: Forecast? = null
-) : Serializable
+)

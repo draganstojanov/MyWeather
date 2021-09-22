@@ -1,25 +1,27 @@
 package com.andraganoid.myweather.model.response
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class Astro(
 
-    @Json(name = "moonset")
+    @SerialName("moonset")
     val moonset: String? = null,
 
-    @Json(name = "moon_illumination")
+    @SerialName("moon_illumination")
     val moonIllumination: String? = null,
 
-    @Json(name = "sunrise")
+    @SerialName("sunrise")
     val sunrise: String? = null,
 
-    @Json(name = "moon_phase")
+    @SerialName("moon_phase")
     val moonPhase: String? = null,
 
-    @Json(name = "sunset")
+    @SerialName("sunset")
     val sunset: String? = null,
 
-    @Json(name = "moonrise")
+    @SerialName("moonrise")
     val moonrise: String? = null
-) : Serializable
+)

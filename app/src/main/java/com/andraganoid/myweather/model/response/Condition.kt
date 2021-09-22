@@ -1,16 +1,17 @@
 package com.andraganoid.myweather.model.response
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Condition(
 
-    @Json(name = "code")
+    @SerialName("code")
     val code: Int? = null,
 
-    @Json(name = "icon")
+    @SerialName("icon")
     val icon: String? = null,
 
-    @Json(name = "text")
+    @SerialName("text")
     val text: String? = null
-) : Serializable
+)

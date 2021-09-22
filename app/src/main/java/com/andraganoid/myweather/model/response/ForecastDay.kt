@@ -1,26 +1,27 @@
 package com.andraganoid.myweather.model.response
 
 import com.andraganoid.myweather.util.DateFormatter
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ForecastDay(
 
-    @Json(name = "date")
+    @SerialName("date")
     val date: String? = null,
 
-    @Json(name = "astro")
+    @SerialName("astro")
     val astro: Astro? = null,
 
-    @Json(name = "date_epoch")
+    @SerialName("date_epoch")
     val dateEpoch: Int? = null,
 
-    @Json(name = "hour")
+    @SerialName("hour")
     val hour: List<HourItem?>? = null,
 
-    @Json(name = "day")
+    @SerialName("day")
     val day: Day? = null
-) : Serializable {
+) {
     val dayName: String
         get() = DateFormatter.dayNameShort(date)
 

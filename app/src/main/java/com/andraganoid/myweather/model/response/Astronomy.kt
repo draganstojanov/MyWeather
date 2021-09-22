@@ -1,10 +1,12 @@
 package com.andraganoid.myweather.model.response
 
-import com.squareup.moshi.Json
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class Astronomy(
 
-    @Json(name = "astro")
+    @SerialName("astro")
     val astro: Astro? = null
-) : Serializable
+)
