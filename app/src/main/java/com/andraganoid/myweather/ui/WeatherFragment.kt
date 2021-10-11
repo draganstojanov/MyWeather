@@ -17,7 +17,7 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
 
     private val viewModel: WeatherViewModel by activityViewModels()
     private lateinit var tabTitle: List<String>
-    private val binding:WeatherFragmentBinding by viewBinding()
+    private val binding: WeatherFragmentBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

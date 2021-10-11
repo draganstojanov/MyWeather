@@ -12,7 +12,8 @@ import com.andraganoid.myweather.model.response.HourItem
 class DayAdapter(private val dayList: List<ForecastDay?>?) : RecyclerView.Adapter<DayAdapter.DayHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayHolder = DayHolder(DayItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayHolder =
+        DayHolder(DayItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: DayHolder, position: Int) = holder.bind(dayList?.get(position))
 
@@ -25,7 +26,8 @@ class DayAdapter(private val dayList: List<ForecastDay?>?) : RecyclerView.Adapte
         fun bind(forecastDay: ForecastDay?) {
             binding.forecastDay = forecastDay
 
-            val p = if (Integer.valueOf(forecastDay?.day?.dailyChanceOfRain!!) > Integer.valueOf(forecastDay.day.dailyChanceOfSnow!!)) forecastDay.day.dailyChanceOfRain else forecastDay.day.dailyChanceOfSnow
+            val p =
+                if (Integer.valueOf(forecastDay?.day?.dailyChanceOfRain!!) > Integer.valueOf(forecastDay.day.dailyChanceOfSnow!!)) forecastDay.day.dailyChanceOfRain else forecastDay.day.dailyChanceOfSnow
             val prChance = "${binding.root.context.getString(R.string.pr_chance)} $p ${binding.root.context.getString(R.string.percent)}"
             binding.prChance.text = prChance
 

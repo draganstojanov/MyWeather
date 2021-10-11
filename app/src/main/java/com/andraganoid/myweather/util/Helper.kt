@@ -1,18 +1,15 @@
 package com.andraganoid.myweather.util
 
-import android.app.Activity
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import com.andraganoid.myweather.R
 import com.google.android.material.snackbar.Snackbar
 
 
 fun hideKeyboard(view: View) {
-    val  insetController = ViewCompat.getWindowInsetsController(view)
+    val insetController = ViewCompat.getWindowInsetsController(view)
     insetController?.hide(WindowInsetsCompat.Type.ime())
 }
 
