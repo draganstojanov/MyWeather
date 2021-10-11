@@ -4,7 +4,6 @@ package com.andraganoid.myweather.api
 import com.andraganoid.connectivity.ConnectivityState.Companion.connectivityStatus
 import com.andraganoid.myweather.model.ResponseError
 import com.andraganoid.myweather.util.parseErrJsonResponse
-
 import retrofit2.Response
 
 abstract class BaseApiResponse {
