@@ -4,14 +4,16 @@ import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.andraganoid.myweather.R
 import com.google.android.material.snackbar.Snackbar
 
 
-fun Fragment.hideKeyboard(view: View) {
-    val imm: InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
+fun hideKeyboard(view: View) {
+    val  insetController = ViewCompat.getWindowInsetsController(view)
+    insetController?.hide(WindowInsetsCompat.Type.ime())
 }
 
 fun View.actionSnackbar(msg: Any?, action: (View) -> Unit) {

@@ -2,6 +2,7 @@ package com.andraganoid.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 class Prefs(val context: Context) {
 
@@ -14,7 +15,7 @@ class Prefs(val context: Context) {
         get() = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     fun saveLastCalledQuery(query: String) {
-        sharedPreferences.edit().putString(LAST_CALLED_QUERY, query).apply()
+        sharedPreferences.edit { putString(LAST_CALLED_QUERY,query) }
     }
 
     fun getLastCalledQuery(): String? = sharedPreferences.getString(LAST_CALLED_QUERY, "")

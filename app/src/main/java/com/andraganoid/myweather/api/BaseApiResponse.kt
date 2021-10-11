@@ -4,13 +4,12 @@ package com.andraganoid.myweather.api
 import com.andraganoid.connectivity.ConnectivityState.Companion.connectivityStatus
 import com.andraganoid.myweather.model.ResponseError
 import com.andraganoid.myweather.util.parseErrJsonResponse
-
 import retrofit2.Response
 
 abstract class BaseApiResponse {
     suspend fun <T> apiCall(apiCall: suspend () -> Response<T>): ResponseState<T> {
-        if (connectivityStatus) {
-            return try {
+        return if (connectivityStatus) {
+            try {
                 val response = apiCall()
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -20,14 +19,17 @@ abstract class BaseApiResponse {
                         ResponseState.Error("Something went wrong")
                     }
                 } else {
-                    val errorResponse: ResponseError? = response.parseErrJsonResponse<ResponseError>()
-                    return if (errorResponse != null) ResponseState.Error(errorResponse.error?.message.toString()) else ResponseState.Error("Something went wrong")
+                    val errorResponse: ResponseError? =
+                        response.parseErrJsonResponse<ResponseError>()
+                    return if (errorResponse != null) ResponseState.Error(errorResponse.error?.message.toString()) else ResponseState.Error(
+                        "Something went wrong"
+                    )
                 }
             } catch (exc: Exception) {
                 ResponseState.Error(exc.localizedMessage!!)
             }
         } else {
-            return ResponseState.Error("No network")
+            ResponseState.Error("No network")
         }
     }
 }
