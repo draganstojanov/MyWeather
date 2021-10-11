@@ -19,7 +19,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: WeatherViewModel by viewModels()
-    private val binding:ActivityMainBinding by viewBinding()
+    private val binding: ActivityMainBinding by viewBinding()
 
     @Inject
     lateinit var conn: ConnectivityState
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setup()
-        supportFragmentManager.beginTransaction()
+        supportFragmentManager
+            .beginTransaction()
             .add(R.id.fragmentContainer, WeatherFragment(), WeatherFragment::class.simpleName)
             .commit()
         setContentView(binding.root)
