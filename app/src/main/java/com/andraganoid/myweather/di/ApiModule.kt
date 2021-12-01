@@ -1,13 +1,17 @@
 package com.andraganoid.myweather.di
 
 
+import android.content.Context
 import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.api.ApiService
 import com.andraganoid.myweather.api.EndPoints
 import com.andraganoid.myweather.util.moshi
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,14 +26,21 @@ import javax.inject.Singleton
 class ApiModule {
 
     @Provides
-    fun providesClient(): OkHttpClient {
+    fun providesChucker(@ApplicationContext context: Context): ChuckerInterceptor.Builder = ChuckerInterceptor.Builder(context)
+        .collector(ChuckerCollector(context))
+        .maxContentLength(250000L)
+        .redactHeaders(emptySet())
+        .alwaysReadResponseBody(false)
+
+
+    @Provides
+    fun providesClient(chucker: ChuckerInterceptor.Builder): OkHttpClient {
         val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-            client.addInterceptor(loggingInterceptor)
+            client.addInterceptor(HttpLoggingInterceptor().also { it.setLevel(HttpLoggingInterceptor.Level.BODY) })
+            client.addInterceptor(chucker.build())
         }
         return client.build()
     }
