@@ -5,16 +5,13 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.andraganoid.myweather.R
-import com.andraganoid.myweather.databinding.ForecastFragmentBinding
 import com.andraganoid.myweather.databinding.SearchFragmentBinding
 import com.andraganoid.myweather.ui.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
@@ -37,6 +34,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
         super.onViewCreated(view, savedInstanceState)
         setup()
     }
+
     private fun setup() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.getLocationBtn.setOnClickListener { getLocation() }

@@ -47,11 +47,13 @@ object DateFormatter {
 
     }
 
-    fun dayNameShort(dateString: String?): String = dateOnly(dateString).dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase(Locale.getDefault())
+    fun dayNameShort(dateString: String?): String =
+        dateOnly(dateString).dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase(Locale.getDefault())
 
     fun dayDate(dateString: String?): String = "${dateOnly(dateString).dayOfMonth}."
 
-    fun dayMonth(dateString: String?): String = dateOnly(dateString).month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase(Locale.getDefault())
+    fun dayMonth(dateString: String?): String =
+        dateOnly(dateString).month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase(Locale.getDefault())
 
     private fun dateOnly(dateString: String?): LocalDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 

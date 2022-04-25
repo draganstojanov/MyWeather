@@ -3,17 +3,17 @@ package com.andraganoid.myweather.util
 import android.util.Log
 
 fun logA(msg: Any) {
-    Log.d("AAA-AAAA", msg.toString())
+    Log.d("DEBUG-AAAA", msg.toString())
 }
 
 fun logB(msg: Any) {
-    Log.d("AAA-BBBB", msg.toString())
+    Log.d("DEBUG-BBBB", msg.toString())
 }
 
 fun logC(msg: Any) {
-    Log.d("AAA-CCCC", msg.toString())
+    Log.d("DEBUG-CCCC", msg.toString())
 }
 
 fun logD(msg: Any) {
-    Log.d("DDDD", msg.toString())
+    Log.d("DEBUG-DDDD", msg.toString())
 }

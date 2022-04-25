@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 is ResponseState.Error -> {
                     binding.root.actionSnackbar(responseState.message) {}
                 }
+                else -> {}
             }
         }
         )
