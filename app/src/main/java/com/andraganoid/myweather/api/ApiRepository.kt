@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ApiRepository @Inject constructor(private val apiService: ApiService) : BaseApiResponse() {
 
 
-    suspend fun getForecast(query: String): Flow<ResponseState<ForecastResponse>> = flow<ResponseState<ForecastResponse>> {
+    suspend fun getForecast(query: String): Flow<ResponseState<ForecastResponse>> = flow {
         emit(apiCall {
             apiService.getForecast(
                 mapOf(
@@ -26,7 +26,7 @@ class ApiRepository @Inject constructor(private val apiService: ApiService) : Ba
         })
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getAstronomy(query: String): Flow<ResponseState<AstronomyResponse>> = flow<ResponseState<AstronomyResponse>> {
+    suspend fun getAstronomy(query: String): Flow<ResponseState<AstronomyResponse>> = flow {
         emit(apiCall {
             apiService.getAstronomy(
                 mapOf(
