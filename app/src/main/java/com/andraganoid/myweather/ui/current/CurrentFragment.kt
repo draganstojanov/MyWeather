@@ -61,7 +61,7 @@ class CurrentFragment : Fragment() {
         binding.refreshBtn.setOnClickListener {
             viewModel.repeatLastCall()
         }
-        viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
+        viewModel.weatherData.observe(viewLifecycleOwner) { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> binding.loading = true
                 is ResponseState.Success -> {
@@ -70,8 +70,9 @@ class CurrentFragment : Fragment() {
                         is ForecastResponse -> setCurrentWeather(responseState.data)
                     }
                 }
+                else -> {}
             }
-        })
+        }
     }
 
     private fun setCurrentWeather(forecastResponse: ForecastResponse?) {

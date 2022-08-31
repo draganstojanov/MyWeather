@@ -1,13 +1,13 @@
 buildscript {
-    val hiltVersion="2.41"
+    val hiltVersion="2.43.2"
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.1.3")
-        classpath(kotlin("gradle-plugin", version = "1.6.21"))
+        classpath("com.android.tools.build:gradle:7.2.2")
+        classpath(kotlin("gradle-plugin", version = "1.7.10"))
         classpath ("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
     }
 }
