@@ -9,7 +9,6 @@ import com.andraganoid.myweather.model.response.ForecastResponse
 import com.andraganoid.myweather.util.toQueryModel
 import com.andraganoid.prefs.Prefs
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,19 +20,15 @@ class WeatherViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _weatherData = MutableLiveData<ResponseState<*>>()
-    val weatherData: LiveData<ResponseState<*>>
-        get() = _weatherData
+    val weatherData: LiveData<ResponseState<*>> get() = _weatherData
 
-    val _showFragment = MutableLiveData<Int>()
-    val showFragment: LiveData<Int>
-        get() = _showFragment
+    private val _viewPagerCurrentItem = MutableLiveData<Int>()
+    val viewPagerCurrentItem: LiveData<Int> get() = _viewPagerCurrentItem
 
     private val _getLocation = MutableLiveData(false)
-    val getLocation: LiveData<Boolean>
-        get() = _getLocation
+    val getLocation: LiveData<Boolean> get() = _getLocation
 
     var canRepeatLastCall = true
-
 
     fun getForecast(query: String) {
         viewModelScope.launch {
@@ -68,12 +63,16 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    fun getSavedQuerys() = dbRepository.getAllQueries().asLiveData()
+    fun getSavedQueries() = dbRepository.getAllQueries().asLiveData()
 
     fun deleteSavedQuery(query: QueryModel) {
         viewModelScope.launch {
             dbRepository.deleteQuery(query)
         }
+    }
+
+    fun setViewPagerCurrentItem(item: Int) {
+        _viewPagerCurrentItem.value = item
     }
 
 }

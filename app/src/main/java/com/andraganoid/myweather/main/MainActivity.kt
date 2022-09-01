@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setup() {
         conn.setListeners()
-        viewModel.weatherData.observe(this, { responseState ->
+        viewModel.weatherData.observe(this) { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> {
                     binding.root.showSnackbar("LOADING")
@@ -52,6 +52,5 @@ class MainActivity : AppCompatActivity() {
                 else -> {}
             }
         }
-        )
     }
 }

@@ -77,7 +77,7 @@ class CurrentFragment : Fragment() {
 
     private fun setCurrentWeather(forecastResponse: ForecastResponse?) {
         hideKeyboard(binding.root)
-        viewModel._showFragment.value = 0
+        viewModel.setViewPagerCurrentItem(0)
         binding.loading = false
 
         binding.current = forecastResponse?.current

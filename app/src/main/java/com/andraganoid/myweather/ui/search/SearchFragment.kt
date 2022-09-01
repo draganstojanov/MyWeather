@@ -45,7 +45,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
             hideKeyboard(binding.root)
         }
 
-        viewModel.getSavedQuerys().observe(viewLifecycleOwner, { savedList ->
+        viewModel.getSavedQueries().observe(viewLifecycleOwner, { savedList ->
             savedAdapter.savedList = savedList
         })
 

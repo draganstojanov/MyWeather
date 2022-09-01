@@ -38,9 +38,9 @@ class WeatherFragment : Fragment(R.layout.weather_fragment) {
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
-        viewModel.showFragment.observe(viewLifecycleOwner, {
+        viewModel.viewPagerCurrentItem.observe(viewLifecycleOwner) {
             binding.viewPager.currentItem = it
-        })
+        }
     }
 
 }

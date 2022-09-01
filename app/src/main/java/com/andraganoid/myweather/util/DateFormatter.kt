@@ -10,8 +10,7 @@ import java.util.*
 
 object DateFormatter {
 
-    private val now: LocalDateTime?
-        get() = LocalDateTime.now()
+    private val now: LocalDateTime? get() = LocalDateTime.now()
 
     private lateinit var formatter: DateTimeFormatter
     private lateinit var dateTime: LocalDateTime
@@ -19,9 +18,9 @@ object DateFormatter {
 
     fun hourInDay(): Int = now?.hour!!
 
-    fun todayWeekDay(): String? = now?.dayOfWeek?.getDisplayName(TextStyle.FULL_STANDALONE, Locale.ENGLISH)
+    fun todayWeekDay(): String? = now?.dayOfWeek?.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
 
-    fun dateToday(): String = "${now?.dayOfMonth}.${now?.month?.getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)}"
+    fun dateToday(): String = "${now?.dayOfMonth}.${now?.month?.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)}"
 
     fun dateQueryToday(): String = "${now?.year}-${now?.monthValue}-${now?.dayOfMonth}"
 
@@ -33,7 +32,6 @@ object DateFormatter {
         } catch (exc: Exception) {
             ""
         }
-
     }
 
     fun timeFromDate(dateString: String?): String {
@@ -44,7 +42,6 @@ object DateFormatter {
         } catch (exc: Exception) {
             ""
         }
-
     }
 
     fun dayNameShort(dateString: String?): String =
@@ -56,6 +53,5 @@ object DateFormatter {
         dateOnly(dateString).month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase(Locale.getDefault())
 
     private fun dateOnly(dateString: String?): LocalDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-
 
 }
