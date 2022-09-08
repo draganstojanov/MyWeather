@@ -25,11 +25,11 @@ class ForecastFragment : Fragment(R.layout.forecast_fragment) {
     }
 
     private fun setup() {
-        viewModel.weatherData.observe(viewLifecycleOwner, { responseState ->
+        viewModel.weatherData.observe(viewLifecycleOwner){ responseState ->
             if (responseState.data is ForecastResponse) {
                 setForecastWeather(responseState.data)
             }
-        })
+        }
     }
 
     private fun setForecastWeather(forecast: ForecastResponse?) {
