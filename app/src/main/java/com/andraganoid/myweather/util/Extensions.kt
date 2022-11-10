@@ -1,7 +1,7 @@
 package com.andraganoid.myweather.util
 
-import com.andraganoid.myweather.model.db.QueryModel
-import com.andraganoid.myweather.model.response.Location
+import com.andraganoid.myweather.util.database.model.QueryModel
+import com.andraganoid.myweather.util.network.model.response.Location
 import java.math.RoundingMode
 import java.text.DecimalFormat
 

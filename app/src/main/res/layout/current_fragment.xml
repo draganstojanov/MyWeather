@@ -9,11 +9,11 @@
 
         <variable
             name="current"
-            type="com.andraganoid.myweather.model.response.Current" />
+            type="com.andraganoid.myweather.util.network.model.response.Current" />
 
         <variable
             name="location"
-            type="com.andraganoid.myweather.model.response.Location" />
+            type="com.andraganoid.myweather.util.network.model.response.Location" />
 
         <variable
             name="loading"
