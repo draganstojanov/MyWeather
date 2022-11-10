@@ -6,10 +6,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andraganoid.connectivity.ConnectivityState
 import com.andraganoid.myweather.R
-import com.andraganoid.myweather.api.ResponseState
+import com.andraganoid.myweather.util.network.ResponseState
 import com.andraganoid.myweather.databinding.ActivityMainBinding
-import com.andraganoid.myweather.ui.WeatherFragment
-import com.andraganoid.myweather.ui.WeatherViewModel
+import com.andraganoid.myweather.weather.ui.fragment.WeatherFragment
+import com.andraganoid.myweather.weather.viewModel.WeatherViewModel
 import com.andraganoid.myweather.util.actionSnackbar
 import com.andraganoid.myweather.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setup() {
         conn.setListeners()
-        viewModel.weatherData.observe(this, { responseState ->
+        viewModel.weatherData.observe(this) { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> {
                     binding.root.showSnackbar("LOADING")
@@ -52,6 +52,5 @@ class MainActivity : AppCompatActivity() {
                 else -> {}
             }
         }
-        )
     }
 }

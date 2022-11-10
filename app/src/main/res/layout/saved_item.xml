@@ -7,7 +7,7 @@
 
         <variable
             name="query"
-            type="com.andraganoid.myweather.model.db.QueryModel" />
+            type="com.andraganoid.myweather.util.database.model.QueryModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

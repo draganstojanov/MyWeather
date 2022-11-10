@@ -6,7 +6,7 @@
 
         <variable
             name="hour"
-            type="com.andraganoid.myweather.model.response.HourItem" />
+            type="com.andraganoid.myweather.util.network.model.response.HourItem" />
 
         <variable
             name="hourValue"
