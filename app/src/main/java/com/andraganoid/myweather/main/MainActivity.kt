@@ -6,12 +6,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andraganoid.connectivity.ConnectivityState
 import com.andraganoid.myweather.R
-import com.andraganoid.myweather.util.network.ResponseState
 import com.andraganoid.myweather.databinding.ActivityMainBinding
+import com.andraganoid.myweather.util.actionSnackbar
+import com.andraganoid.myweather.util.network.ResponseState
+import com.andraganoid.myweather.util.showSnackbar
 import com.andraganoid.myweather.weather.ui.fragment.WeatherFragment
 import com.andraganoid.myweather.weather.viewModel.WeatherViewModel
-import com.andraganoid.myweather.util.actionSnackbar
-import com.andraganoid.myweather.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        conn.setListeners()
+        lifecycle.addObserver(conn)
         viewModel.weatherData.observe(this) { responseState ->
             when (responseState) {
                 is ResponseState.Loading -> {
