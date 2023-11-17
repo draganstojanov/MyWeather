@@ -1,23 +1,9 @@
-buildscript {
-    val hiltVersion="2.44"
-
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
-        classpath(kotlin("gradle-plugin", version = "1.7.10"))
-        classpath ("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://jitpack.io") }
-    }
+plugins {
+    id("com.android.application") version "8.1.4" apply false
+    id("com.android.library") version "8.1.4" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
+    id("com.google.dagger.hilt.android") version "2.48.1" apply false
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13" apply false
 }
 
 tasks.register("clean", Delete::class) {

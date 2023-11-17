@@ -1,6 +1,5 @@
 package com.andraganoid.myweather.util.network.di
 
-
 import android.content.Context
 import com.andraganoid.myweather.BuildConfig
 import com.andraganoid.myweather.util.network.ApiService
